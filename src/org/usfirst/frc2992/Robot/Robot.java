@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc2992.Cygnusv1.Robot;
 import org.usfirst.frc2992.Robot.commands.*;
 import org.usfirst.frc2992.Robot.subsystems.*;
 
