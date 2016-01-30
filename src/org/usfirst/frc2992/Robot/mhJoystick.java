@@ -36,16 +36,12 @@ public class mhJoystick extends Joystick{
 	 * @return  smoothed value
 	 */
 	protected double smoothPowerCurve (double x) {
-        //double a = this.getThrottle();
-        double a = 1.0;         // Hard code to max smoothing 
-        double b = 0.15;
         
-        if (x > 0.0)
-            return (b + (1.0-b)*(a*x*x*x+(1.0-a)*x));
-        
-        else if (x<0.0)
-            return (-b + (1.0-b)*(a*x*x*x+(1.0-a)*x));
-        else return 0.0;
+        if (x > 0 || x< 0){
+            return (x*x*x);
+        }else{
+        	return 0;
+        }
     }
 	
 	

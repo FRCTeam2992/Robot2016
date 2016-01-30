@@ -96,6 +96,13 @@ public class OI {
         flyWheelFastSlowOff = new JoystickButton(switchbox, 2);
         
     }
-
+    
+    public mhJoystick getLeftJoy(){
+    	return leftJoy;
+    }
+    
+    public mhJoystick getRightJoy(){
+    	return rightJoy;
+    }
 }
 
