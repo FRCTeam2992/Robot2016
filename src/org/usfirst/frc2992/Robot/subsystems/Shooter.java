@@ -37,6 +37,7 @@ public class Shooter extends Subsystem {
     private final Encoder shooterwheelencoder = RobotMap.shooterShooterwheelencoder;
     
     final double shootspeed = .85;
+    final double shootspeedlow = .45;
     final double reversespeed = -.25;
     
     public boolean shootOn = false;
@@ -61,10 +62,14 @@ public class Shooter extends Subsystem {
     	return shootOn;
     }
     
-    public void shoot(){
+    public void shootHigh(){
     	shooterwheel.set(shootspeed);
     	shootOn = true;
     	SmartDashboard.putNumber("shooter wheel", shooterwheelencoder.getRate());
+    }
+    
+    public void shootLow(){
+    	shooterwheel.set(shootspeedlow);
     }
     
     public void reverse(){
