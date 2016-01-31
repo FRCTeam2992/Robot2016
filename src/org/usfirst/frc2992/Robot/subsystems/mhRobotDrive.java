@@ -1,20 +1,29 @@
 package org.usfirst.frc2992.Robot.subsystems;
 
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.VictorSP;
 
 public class mhRobotDrive{
 
-	Talon[] leftDriveMotors;
-	Talon[] rightDriveMotors;
-	int[] leftMotorChannels;
-	int[] rightMotorChannels;
-	int i = 3;
+	SpeedController[] leftDriveMotors;
+	SpeedController[] rightDriveMotors;
+
 	
-	public mhRobotDrive(int[] leftMotorChannels, int[] rightMotorChannels){
-		leftDriveMotors[i] = new Talon(leftMotorChannels[i]);
-        rightDriveMotors[i] = new Talon(rightMotorChannels[i]);
+	public mhRobotDrive(){
+		leftDriveMotors = new SpeedController[3];
+		leftDriveMotors[0] = new Talon(0);
+		leftDriveMotors[1] = new Talon(1);
+		leftDriveMotors[2] = new VictorSP(2);
+		
+		rightDriveMotors = new SpeedController[3];
+		rightDriveMotors[0] = new Talon(3);
+		rightDriveMotors[1] = new Talon(4);
+		rightDriveMotors[2] = new VictorSP(5);
+		
     }
 	
+
 	/**
     *
     * Tank drive method. Takes in left and right tank drive joystick input
@@ -32,13 +41,15 @@ public class mhRobotDrive{
 
        // Set the drive motors
        setLeftSpeed(leftDriveMotors, leftspeed);
-       setRightSpeed(rightDriveMotors, rightspeed);
+       setRightSpeed(rightDriveMotors, -rightspeed);
+       
+      
 
        // Smartdashboard update
        // SmartDashboard.putNumber("Left Motor Speed", leftspeed);
        // SmartDashboard.putNumber("Right Motor Speed", rightspeed);
    }
-
+  
 /**
 *
 * Internal utility method to actually set the left drive motors directly.
@@ -48,8 +59,11 @@ public class mhRobotDrive{
 * @param speed -- speed to set the motors to
 *
 */
-	private void setLeftSpeed(Talon[] leftDriveMotors, double speed) {
-           leftDriveMotors[i].set(speed);
+	private void setLeftSpeed(SpeedController[] leftDriveMotors, double speed) {
+        for (int i=0; i<leftDriveMotors.length; i++){
+    		leftDriveMotors[i].set(speed);
+        	
+        }
     }
 	/**
 	*
@@ -60,11 +74,11 @@ public class mhRobotDrive{
 	* @param speed -- speed to set the motors to
 	*
 	*/
-	private void setRightSpeed(Talon[] rightDriveMotors, double speed) {
+	private void setRightSpeed(SpeedController[] rightDriveMotors, double speed) {
+		for (int i=0; i<rightDriveMotors.length; i++) {
 	           rightDriveMotors[i].set(speed);
+		}
     }
-	/**
-	 * sets all motors to 0
-	 */
+	
 	
 }
