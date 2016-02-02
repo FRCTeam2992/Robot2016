@@ -1,4 +1,4 @@
-package org.usfirst.frc2992.Robot.subsystems;
+package org.usfirst.frc2992.Robot;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;

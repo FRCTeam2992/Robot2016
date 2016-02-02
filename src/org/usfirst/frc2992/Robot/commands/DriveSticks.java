@@ -14,7 +14,6 @@ package org.usfirst.frc2992.Robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc2992.Robot.Robot;
 import org.usfirst.frc2992.Robot.mhJoystick;
-import org.usfirst.frc2992.Robot.subsystems.DriveTrain;
 
 /**
  *
@@ -53,6 +52,7 @@ public class DriveSticks extends Command {
     	double rightY = rightJoy.smoothGetY();
     	
     	Robot.mhRobotDrive.tankDrive(leftY, rightY);
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
