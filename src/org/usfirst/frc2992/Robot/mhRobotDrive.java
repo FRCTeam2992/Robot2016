@@ -11,13 +11,13 @@ public class mhRobotDrive implements MotorSafety{
 	SpeedController[] leftDriveMotors;
 	SpeedController[] rightDriveMotors;
 	
-	SpeedController mLF = leftDriveMotors[0];
-	SpeedController mLM = leftDriveMotors[1];
-	SpeedController mLR = leftDriveMotors[2];
+	SpeedController mLF;
+	SpeedController mLM;
+	SpeedController mLR;
 	
-	SpeedController mRF = rightDriveMotors[0];
-	SpeedController mRM = rightDriveMotors[1];
-	SpeedController mRR = rightDriveMotors[2];
+	SpeedController mRF;
+	SpeedController mRM;
+	SpeedController mRR;
 	
 	Encoder LEnc;
 	Encoder REnc;
@@ -41,6 +41,15 @@ public class mhRobotDrive implements MotorSafety{
 		rightDriveMotors[0] = RobotMap.RFWheel;
 		rightDriveMotors[1] = RobotMap.RMWheel;
 		rightDriveMotors[2] = RobotMap.RRWheel;
+
+		mLF = leftDriveMotors[0];
+		mLM = leftDriveMotors[1];
+		mLR = leftDriveMotors[2];
+		
+		mRF = rightDriveMotors[0];
+		mRM = rightDriveMotors[1];
+		mRR = rightDriveMotors[2];
+		
 		
     }
 	

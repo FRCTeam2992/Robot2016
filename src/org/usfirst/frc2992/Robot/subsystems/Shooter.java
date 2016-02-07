@@ -39,24 +39,17 @@ public class Shooter extends Subsystem {
     
     PIDController ShootPID;
     
-    //final double shootspeed = .85;
-    //final double shootspeedlow = .45;
+    final double shootspeed = .85;
+    final double shootspeedlow = .45;
     final double reversespeed = -.25;
     
-    final double hkP = 0.0;
-    final double hkI = 0.0;
-    final double hkD = 0.0;
-    final double hkF = 0.0;
-    
-    final double lkP = 0.0;
-    final double lkI = 0.0;
-    final double lkD = 0.0;
-    final double lkF = 0.0;
+    final double kP = 0.0;
+    final double kI = 0.0;
+    final double kD = 0.0;
+    final double kF = 0.0;
     
     public final double PowerMax = 1.00;
 	public final double SpeedMax = 10.0;
-	
-	public final double low = 0.5;
     
     public boolean shootOn = false;
 
@@ -82,7 +75,7 @@ public class Shooter extends Subsystem {
     
     public void shootHigh(){
     	
-    	PIDController ShootPID = new PIDController(hkP, hkI, hkD, hkF, ShootEnc, shooterwheel);
+    	PIDController ShootPID = new PIDController(kP, kI, kD, kF, ShootEnc, shooterwheel);
     	ShootPID.setOutputRange(-PowerMax, PowerMax);
 		ShootPID.setInputRange(-SpeedMax, SpeedMax);
 		ShootPID.setPercentTolerance(1.0);
@@ -100,21 +93,7 @@ public class Shooter extends Subsystem {
     }
     
     public void shootLow(){
-    	PIDController ShootPID = new PIDController(lkP, lkI, lkD, lkF, ShootEnc, shooterwheel);
-    	ShootPID.setOutputRange(-PowerMax*low, PowerMax*low);
-		ShootPID.setInputRange(-SpeedMax, SpeedMax);
-		ShootPID.setPercentTolerance(1.0);
-		ShootPID.enable();
-    	
-    	ShootEnc.reset();
-    	
-    	
-    	shooterwheel.set(ShootPID.get());
-    	
-    	if(ShootPID.onTarget() == true){
-    	shootOn = true;
-    	}
-    	SmartDashboard.putNumber("shooter wheel", ShootEnc.getRate());
+    	shooterwheel.set(shootspeedlow);
     }
     
     public void reverse(){

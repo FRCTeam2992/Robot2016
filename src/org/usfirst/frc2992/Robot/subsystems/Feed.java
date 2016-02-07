@@ -13,11 +13,9 @@ package org.usfirst.frc2992.Robot.subsystems;
 
 import org.usfirst.frc2992.Robot.Robot;
 import org.usfirst.frc2992.Robot.RobotMap;
-import org.usfirst.frc2992.Robot.mhJoystick;
 import org.usfirst.frc2992.Robot.commands.*;
 import org.usfirst.frc2992.Robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
@@ -45,7 +43,7 @@ public class Feed extends Subsystem {
     final double feedRspeed = -.25;
     
     // Need to fix this.  Setting it temporarily to true.
-    //private boolean limit = true;
+    private boolean limit = true;
 
     
 
@@ -60,7 +58,7 @@ public class Feed extends Subsystem {
     }
     
     public void feedIn(){
-    	if(feedersystemLimitswitch.get() == false || limit() == true){
+    	if(feedersystemLimitswitch.get() == false || limit == true){
     		feederwheel.set(feedFspeed);
     		SmartDashboard.putNumber("feed wheel", feederwheel.get());
     	} else{
@@ -78,24 +76,11 @@ public class Feed extends Subsystem {
     	SmartDashboard.putNumber("feed wheel", feederwheel.get());
     }
     
-    public void FeedControl(){
-    	Joystick ButtonBox = Robot.oi.getButtonBox();
-    	
-    	if(ButtonBox.getRawButton(3)){
-    		feedIn();
-    	} 
-    	if(ButtonBox.getRawButton(4)){
-    		TailDown();
-    	} else{
-    		TailUp();
-    	}
-    }
-    
     //fix for limit?
     
-    public boolean limit(){
-    	return Robot.shooter.shootOn;
-     }
+    //public boolean limit(){
+    //	return Robot.shooter.shootOn;
+    // }
     
 
     // Put methods for controlling this subsystem
