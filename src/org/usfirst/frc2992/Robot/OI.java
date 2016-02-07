@@ -65,11 +65,16 @@ public class OI {
 	public JoystickButton gearLow;
 	
 	// switchbox buttons
-	public JoystickButton shoot;
+	public JoystickButton shootHigh;
+	public JoystickButton shootLow;
 	public JoystickButton intakeInvert;
 	public JoystickButton duckTailUpDown;
 	public JoystickButton intakeOnOff;
 	public JoystickButton flyWheelFastSlowOff;
+	public JoystickButton intakeOut;
+	public JoystickButton Auto1;
+	public JoystickButton Auto2;
+	public JoystickButton Auto3;
 	
 	// following button is regarding a possibility of being able to press a button to line yourself up and shoot for you.
 	public JoystickButton smartShoot;
@@ -89,11 +94,31 @@ public class OI {
         gearLow = new JoystickButton(leftJoy, 1);
         
         //switchbox button assigments, **need to verify**
-        shoot = new JoystickButton(switchbox, 5);
+        
+        Auto1 = new JoystickButton(switchbox, 14);
+        Auto2 = new JoystickButton(switchbox, 15);
+        Auto3 = new JoystickButton(switchbox, 16);
+        shootHigh = new JoystickButton(switchbox, 5);
+        shootLow = new JoystickButton(switchbox, 6);
         intakeInvert = new JoystickButton(switchbox, 4);
         duckTailUpDown = new JoystickButton(switchbox, 1);
         intakeOnOff = new JoystickButton(switchbox, 3);
+        intakeOut = new JoystickButton(switchbox, 7);
         flyWheelFastSlowOff = new JoystickButton(switchbox, 2);
+        
+        shootHigh.whenPressed(new ShootHigh());
+        shootLow.whenPressed(new ShootLow());
+        
+        intakeInvert.whenPressed(new FeedOut());
+        
+        duckTailUpDown.whenActive(new DuckTailUp());
+        duckTailUpDown.whenInactive(new DuckTailDown());
+        
+        intakeOnOff.whenActive(new FeedIn());
+        intakeOnOff.whenInactive(new FeedOff());
+        if(intakeOnOff.get() == false){
+        	intakeOut.whenActive(new FeedOut());
+        }
         
     }
     
@@ -103,6 +128,10 @@ public class OI {
     
     public mhJoystick getRightJoy(){
     	return rightJoy;
+    }
+    
+    public Joystick getButtonBox(){
+    	return switchbox;
     }
 }
 
