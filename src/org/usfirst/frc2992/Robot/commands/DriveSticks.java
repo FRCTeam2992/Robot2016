@@ -55,10 +55,11 @@ public class DriveSticks extends Command {
     	
     	double leftY = leftJoy.smoothGetY();
     	double rightY = rightJoy.smoothGetY();
+    	boolean leftTrigger = leftJoy.getRawButton(1);
     	
     	//counter to track if both joysticks are reading 0 values
     	
-    	Robot.mhRobotDrive.tankDrive(leftY, rightY);
+    	Robot.mhRobotDrive.tankDrive(leftY, rightY, leftTrigger);
     	
     	if (leftY == 0 && rightY == 0){
     		counter++;
@@ -67,6 +68,7 @@ public class DriveSticks extends Command {
     	}
     	
     	SmartDashboard.putNumber("Joystick counter", counter);
+    	
     	
     }
 

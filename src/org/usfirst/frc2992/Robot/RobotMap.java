@@ -46,7 +46,12 @@ public class RobotMap {
     public static Solenoid driveTrainDriveshifthighlow;
     public static SpeedController feedFeederwheel;
     public static DigitalInput FeedLimit;
-    public static Solenoid feedDucktailupdown;
+    public static DigitalInput ShootReadyLeft;
+    public static DigitalInput ShootReadyRight;
+    public static Solenoid feedLA;
+    public static Solenoid feedLB;
+    public static Solenoid feedRA;
+    public static Solenoid feedRB;
     public static SpeedController shooterShooterwheel;
     public static Encoder ShootEncoder;
     
@@ -104,8 +109,18 @@ public class RobotMap {
         FeedLimit = new DigitalInput(6);
         LiveWindow.addSensor("Feed", "Feeder system Limit switch", FeedLimit);
         
-        feedDucktailupdown = new Solenoid(0, 1);
-        LiveWindow.addActuator("Feed", "Duck tail updown", feedDucktailupdown);
+        ShootReadyLeft = new DigitalInput(7);
+        
+        ShootReadyRight = new DigitalInput(8);
+        
+        feedLA = new Solenoid(0, 1);
+        //LiveWindow.addActuator("Feed", "Duck tail updown", feedLA);
+        
+        feedLB = new Solenoid(0,2);
+        
+        feedRA = new Solenoid(0,3);
+        
+        feedRB = new Solenoid(0,4);
         
         shooterShooterwheel = new Talon(6);
         LiveWindow.addActuator("Shooter", "Shooter wheel", (Talon) shooterShooterwheel);

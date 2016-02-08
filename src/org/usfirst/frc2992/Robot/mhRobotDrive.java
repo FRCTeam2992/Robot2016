@@ -116,7 +116,7 @@ public class mhRobotDrive implements MotorSafety{
     * @param leftJoystickValue
     * @param rightJoystickValue
     */
-   public void tankDrive(double leftJoystickValue, double rightJoystickValue) {
+   public void tankDrive(double leftJoystickValue, double rightJoystickValue, boolean HighGear) {
 
        double leftspeed = leftJoystickValue;
        double rightspeed = rightJoystickValue;
@@ -126,6 +126,14 @@ public class mhRobotDrive implements MotorSafety{
        setLeftSpeed(leftDriveMotors, leftspeed);
        setRightSpeed(rightDriveMotors, -rightspeed);
        
+       /*
+        * shifts between high/low gear
+	    */
+       if (HighGear == true){
+    	   RobotMap.driveTrainDriveshifthighlow.set(true);
+       } else {
+    	   RobotMap.driveTrainDriveshifthighlow.set(false);
+       }
       
 
        // Smartdashboard update

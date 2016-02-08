@@ -75,10 +75,10 @@ public class DriveTrain extends Subsystem {
         // setDefaultCommand(new MySpecialCommand());
     }
     
-    public void tankDrive(double leftY, double rightY){
+    public void tankDrive(double leftY, double rightY, boolean HighGear){
     			
     	
-    	mhRobotDrive.tankDrive(leftY, rightY);
+    	mhRobotDrive.tankDrive(leftY, rightY, HighGear);
     	
     }
     
@@ -112,27 +112,25 @@ public class DriveTrain extends Subsystem {
     		TurnPID.enable();
     		TurnPID.setSetpoint(Degrees);
     		
+    	}else if(Math.abs(Degrees) > 0 && Math.abs(Distance) > 0){
+    		DistPID.enable();
+    		TurnPID.enable();
+    		DistPID.setSetpoint(Distance);
+    		TurnPID.setSetpoint(Degrees);
     	}else{
+    		DistPID.disable();
+    		TurnPID.disable();
     		allStop();
     	}
     }
     
-    /*
-     * shifts between high/low gear
-     */
-    public void HighGear(){
-    	driveshifthighlow.set(true);
-    }
     
-    public void LowGear(){
-    	driveshifthighlow.set(false);
-    }
     
     /*
      * stop all motors
      */
     public void allStop(){
-    	mhRobotDrive.tankDrive(0, 0);
+    	mhRobotDrive.tankDrive(0, 0, false);
     }
 }
 

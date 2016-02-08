@@ -13,6 +13,7 @@ package org.usfirst.frc2992.Robot;
 
 import org.usfirst.frc2992.Robot.commands.*;
 
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -70,6 +71,9 @@ public class OI {
 	public JoystickButton duckTailUpDown;
 	public JoystickButton intakeOnOff;
 	public JoystickButton flyWheelFastSlowOff;
+	public DigitalOutput ShootReadyLeft;
+	public DigitalOutput ShootReadyRight;
+	public DigitalOutput FlyWheelAtSpeed;
 	
 	// following button is regarding a possibility of being able to press a button to line yourself up and shoot for you.
 	public JoystickButton smartShoot;
@@ -85,8 +89,7 @@ public class OI {
         switchbox = new Joystick(2);
         
         // Joystick button assignments, **need to verify**
-        gearHigh = new JoystickButton(rightJoy, 1);
-        gearLow = new JoystickButton(leftJoy, 1);
+        gearHigh = new JoystickButton(leftJoy, 1);
         
         //switchbox button assigments, **need to verify**
         shoot = new JoystickButton(switchbox, 5);
@@ -94,6 +97,9 @@ public class OI {
         duckTailUpDown = new JoystickButton(switchbox, 1);
         intakeOnOff = new JoystickButton(switchbox, 3);
         flyWheelFastSlowOff = new JoystickButton(switchbox, 2);
+        ShootReadyLeft = new DigitalOutput(9);
+        ShootReadyRight = new DigitalOutput(10);
+        FlyWheelAtSpeed = new DigitalOutput(11);
         
     }
     

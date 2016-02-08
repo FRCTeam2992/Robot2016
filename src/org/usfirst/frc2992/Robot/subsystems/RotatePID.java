@@ -14,7 +14,7 @@ public class RotatePID implements PIDOutput {
 	@Override
 	public void pidWrite(double output) {
 		
-		mDrive.tankDrive(-output, output);
+		mDrive.tankDrive(-output, output, false);
 	}
 
 }
