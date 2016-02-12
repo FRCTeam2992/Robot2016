@@ -46,7 +46,7 @@ public class Feed extends Subsystem {
     final double feedRspeed = -.25;
     
     // Need to fix this.  Setting it temporarily to true.
-    private boolean limit = true;
+    //private boolean limit = true;
 
     
 
@@ -74,7 +74,7 @@ public class Feed extends Subsystem {
     }
     
     public void feedIn(){
-    	if(feedersystemLimitswitch.get() == false || limit == true){
+    	if(feedersystemLimitswitch.get() == false || limit() == true){
     		feederwheel.set(feedFspeed);
     		SmartDashboard.putNumber("feed wheel", feederwheel.get());
     	} else{
@@ -94,9 +94,9 @@ public class Feed extends Subsystem {
     
     //fix for limit?
     
-    //public boolean limit(){
-    //	return Robot.shooter.shootOn;
-    // }
+    public boolean limit(){
+    return Robot.shooter.shootOn;
+    }
     
 
     // Put methods for controlling this subsystem

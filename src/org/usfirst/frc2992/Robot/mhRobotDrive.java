@@ -27,7 +27,7 @@ public class mhRobotDrive implements MotorSafety{
 	public final double PowerMax = 1.00;
 	public final double SpeedMax = 10.0;
 	
-	protected MotorSafetyHelper SafetyHelper;
+	protected MotorSafetyHelper safetyHelper;
 	
 	double mKp, mKi, mKd, mKf;
 	
@@ -50,10 +50,11 @@ public class mhRobotDrive implements MotorSafety{
 		mRM = rightDriveMotors[1];
 		mRR = rightDriveMotors[2];
 		
+	    setupMotorSafety();		
 		
     }
 	
-	public void smartDrive(SpeedController LF, SpeedController LM, SpeedController LR, SpeedController RF, SpeedController RM, SpeedController RR,
+	/*public void smartDrive(SpeedController LF, SpeedController LM, SpeedController LR, SpeedController RF, SpeedController RM, SpeedController RR,
 			Encoder LEnc, Encoder REnc,
 			double Kp, double Ki, double Kd, double Kf){
 		
@@ -61,7 +62,6 @@ public class mhRobotDrive implements MotorSafety{
 		mKi = Ki;
 		mKd = Kd;
 		mKf = Kf;
-		
 		
 		LFDrive = new PIDController(mKp, mKi, mKd, mKf, LEnc, mLF);
 		LMDrive = new PIDController(mKp, mKi, mKd, mKf, LEnc, mLM);
@@ -103,9 +103,12 @@ public class mhRobotDrive implements MotorSafety{
 		RRDrive.setInputRange(-SpeedMax, SpeedMax);
 		RRDrive.setPercentTolerance(1.0);
     	RRDrive.disable();
-    	
-    	setupMotorSafety();
+		
+		
+		
+    	//setupMotorSafety();
 	}
+	*/
 	
 	/**
     *
@@ -116,7 +119,7 @@ public class mhRobotDrive implements MotorSafety{
     * @param leftJoystickValue
     * @param rightJoystickValue
     */
-   public void tankDrive(double leftJoystickValue, double rightJoystickValue, boolean HighGear) {
+   public void tankDrive(double leftJoystickValue, double rightJoystickValue){
 
        double leftspeed = leftJoystickValue;
        double rightspeed = rightJoystickValue;
@@ -129,18 +132,19 @@ public class mhRobotDrive implements MotorSafety{
        /*
         * shifts between high/low gear
 	    */
-       if (HighGear == true){
-    	   RobotMap.driveTrainDriveshifthighlow.set(true);
-       } else {
-    	   RobotMap.driveTrainDriveshifthighlow.set(false);
-       }
-      
+       
 
        // Smartdashboard update
        // SmartDashboard.putNumber("Left Motor Speed", leftspeed);
        // SmartDashboard.putNumber("Right Motor Speed", rightspeed);
        
-       setupMotorSafety();
+       if (!safetyHelper.isSafetyEnabled()) {
+           safetyHelper.setSafetyEnabled(true);
+    	   
+       }
+
+       safetyHelper.feed();
+       
    }
   
 /**
@@ -173,31 +177,31 @@ public class mhRobotDrive implements MotorSafety{
 		}
     }
 	public void setExpiration(double timeout) {
-        SafetyHelper.setExpiration(timeout);
+        safetyHelper.setExpiration(timeout);
     }
 
     public double getExpiration() {
-        return SafetyHelper.getExpiration();
+        return safetyHelper.getExpiration();
     }
 
     public boolean isAlive() {
-        return SafetyHelper.isAlive();
+        return safetyHelper.isAlive();
     }
 
     public boolean isSafetyEnabled() {
-        return SafetyHelper.isSafetyEnabled();
+        return safetyHelper.isSafetyEnabled();
     }
 
     public void setSafetyEnabled(boolean enabled) {
-        SafetyHelper.setSafetyEnabled(enabled);
+        safetyHelper.setSafetyEnabled(enabled);
     }
     
     private void setupMotorSafety() {
-        SafetyHelper = new MotorSafetyHelper(this);
-        SafetyHelper.setExpiration(0.1);
-        SafetyHelper.setSafetyEnabled(true);
+        safetyHelper = new MotorSafetyHelper(this);
+        safetyHelper.setExpiration(0.1);
+        //SafetyHelper.setSafetyEnabled(true);
     }
-
+	
 	@Override
 	public void stopMotor() {
 		// TODO Auto-generated method stub
@@ -207,6 +211,7 @@ public class mhRobotDrive implements MotorSafety{
 		for (int i=0; i<leftDriveMotors.length; i++){
 			leftDriveMotors[i].set(0);
 		}
+		safetyHelper.setSafetyEnabled(false);
 	}
 
 	@Override
@@ -214,5 +219,6 @@ public class mhRobotDrive implements MotorSafety{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	
 }

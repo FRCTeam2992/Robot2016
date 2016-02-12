@@ -62,8 +62,11 @@ public class OI {
 	public Joystick switchbox;
 	
 	// joystick buttons
-	public JoystickButton gearHigh;
-	public JoystickButton gearLow;
+	//public JoystickButton gearHigh;
+	//public JoystickButton gearLow;
+	public JoystickButton joyShoot;
+	public JoystickButton joyIntakeOnOff;
+	public JoystickButton joyPhotonOnOff;
 	
 	// switchbox buttons
 	public JoystickButton shoot;
@@ -71,9 +74,7 @@ public class OI {
 	public JoystickButton duckTailUpDown;
 	public JoystickButton intakeOnOff;
 	public JoystickButton flyWheelFastSlowOff;
-	public DigitalOutput ShootReadyLeft;
-	public DigitalOutput ShootReadyRight;
-	public DigitalOutput FlyWheelAtSpeed;
+	public JoystickButton photonOnOff;
 	
 	// following button is regarding a possibility of being able to press a button to line yourself up and shoot for you.
 	public JoystickButton smartShoot;
@@ -89,7 +90,9 @@ public class OI {
         switchbox = new Joystick(2);
         
         // Joystick button assignments, **need to verify**
-        gearHigh = new JoystickButton(leftJoy, 1);
+        joyShoot = new JoystickButton(rightJoy, 1);
+        joyIntakeOnOff = new JoystickButton(leftJoy, 3);
+        joyPhotonOnOff = new JoystickButton(rightJoy, 4);
         
         //switchbox button assigments, **need to verify**
         shoot = new JoystickButton(switchbox, 5);
@@ -97,9 +100,37 @@ public class OI {
         duckTailUpDown = new JoystickButton(switchbox, 1);
         intakeOnOff = new JoystickButton(switchbox, 3);
         flyWheelFastSlowOff = new JoystickButton(switchbox, 2);
-        ShootReadyLeft = new DigitalOutput(9);
-        ShootReadyRight = new DigitalOutput(10);
-        FlyWheelAtSpeed = new DigitalOutput(11);
+        photonOnOff = new JoystickButton(switchbox, 6);
+        
+        
+        if (flyWheelFastSlowOff.get() == true){
+        	shoot.whenPressed(new ShootHigh());
+        	joyShoot.whenPressed(new ShootHigh());
+        } else if(flyWheelFastSlowOff.get() == false){
+        	shoot.whenPressed(new ShootLow());
+        	joyShoot.whenPressed(new ShootLow());
+        }
+        
+        if((intakeOnOff.get() == true || joyIntakeOnOff.get() == true)&& intakeInvert.get() == false){
+        	new FeedIn();
+        } else if((intakeOnOff.get() == true || joyIntakeOnOff.get() == true) && intakeInvert.get() == true){
+        	new FeedOut();
+        } else{
+        	new FeedOff();
+        }
+        
+        duckTailUpDown.whenActive(new DuckTailFullDown());
+        if(shoot.get() == true){
+        	duckTailUpDown.whenInactive(new DuckTailMid());
+        }else{
+        	duckTailUpDown.whenInactive(new DuckTailUp());
+        }
+        
+        photonOnOff.whenActive(new PhotonOn());
+        photonOnOff.whenInactive(new PhotonOff());
+        
+        joyPhotonOnOff.whenPressed(new PhotonOn());
+        joyPhotonOnOff.whenReleased(new PhotonOff());
         
     }
     
@@ -109,6 +140,10 @@ public class OI {
     
     public mhJoystick getRightJoy(){
     	return rightJoy;
+    }
+    
+    public Joystick getSwitchbox(){
+    	return switchbox;
     }
 }
 

@@ -20,7 +20,7 @@ public class DrivePID implements PIDOutput {
 		//get gyro angle
 		double gyroCorrection = mGyro.getAngle();
 		
-		mDrive.tankDrive(output, -gyroCorrection/360, false);
+		mDrive.tankDrive(output, -gyroCorrection/360);
 	}
 
 }

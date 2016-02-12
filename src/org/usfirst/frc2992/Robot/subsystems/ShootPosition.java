@@ -29,18 +29,28 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class ShootPosition extends Subsystem {
 
-	private final DigitalInput SL = RobotMap.ShootReadyLeft;
-	private final DigitalInput SR = RobotMap.ShootReadyRight;
+	private final static DigitalInput SL = RobotMap.ShootReadyLeft;
+	private final static DigitalInput SR = RobotMap.ShootReadyRight;
+	private static boolean ready;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	public boolean ShootReadyLeft(){
+	public static boolean ShootReadyLeft(){
 		return SL.get();
 	}
 	
-	public boolean ShootReadyRight(){
+	public static boolean ShootReadyRight(){
 		return SR.get();
+	}
+	
+	public static boolean ReadyToShoot(){
+		if(ShootReadyLeft() == true && ShootReadyRight() == true){
+			ready = true;
+		} else{
+			ready = false;
+		}
+		return ready;
 	}
 
     public void initDefaultCommand() {

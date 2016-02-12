@@ -15,6 +15,7 @@ package org.usfirst.frc2992.Robot;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -48,6 +49,7 @@ public class RobotMap {
     public static DigitalInput FeedLimit;
     public static DigitalInput ShootReadyLeft;
     public static DigitalInput ShootReadyRight;
+	public static DigitalOutput PhotonCannon;
     public static Solenoid feedLA;
     public static Solenoid feedLB;
     public static Solenoid feedRA;
@@ -87,12 +89,12 @@ public class RobotMap {
         
         REncoder = new Encoder(0, 1, false, EncodingType.k4X);
         LiveWindow.addSensor("DriveTrain", "Right drive train encoder", REncoder);
-        REncoder.setDistancePerPulse(1.0);
+        REncoder.setDistancePerPulse(0.01954833);
         REncoder.setPIDSourceType(PIDSourceType.kRate);
         
         LEncoder = new Encoder(2, 3, true, EncodingType.k4X);
         LiveWindow.addSensor("DriveTrain", "Left drive train encoder", LEncoder);
-        LEncoder.setDistancePerPulse(1.0);
+        LEncoder.setDistancePerPulse(0.01954833);
         LEncoder.setPIDSourceType(PIDSourceType.kRate);
         
         driveTrainGyro = new AnalogGyro(0);
@@ -113,6 +115,8 @@ public class RobotMap {
         
         ShootReadyRight = new DigitalInput(8);
         
+        PhotonCannon = new DigitalOutput(9);
+        
         feedLA = new Solenoid(0, 1);
         //LiveWindow.addActuator("Feed", "Duck tail updown", feedLA);
         
@@ -127,7 +131,7 @@ public class RobotMap {
         
         ShootEncoder = new Encoder(4, 5, false, EncodingType.k4X);
         LiveWindow.addSensor("Shooter", "Shooter wheel encoder", ShootEncoder);
-        ShootEncoder.setDistancePerPulse(1.0);
+        ShootEncoder.setDistancePerPulse(0.01466125);
         ShootEncoder.setSamplesToAverage(5);
         ShootEncoder.setPIDSourceType(PIDSourceType.kRate);
        
