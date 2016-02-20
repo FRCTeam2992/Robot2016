@@ -23,7 +23,7 @@ public class ShootReady extends Command {
 
     public ShootReady() {
 
-        requires(Robot.ShootReady);
+        requires(Robot.shootReady);
     }
 
     // Called just before this Command runs the first time

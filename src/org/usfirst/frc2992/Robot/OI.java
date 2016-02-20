@@ -64,17 +64,30 @@ public class OI {
 	// joystick buttons
 	//public JoystickButton gearHigh;
 	//public JoystickButton gearLow;
-	public JoystickButton joyShoot;
-	public JoystickButton joyIntakeOnOff;
+	public JoystickButton joyShootHigh;
+	public JoystickButton joyShootLow;
+	public JoystickButton joyShootOff;
+	public JoystickButton joyIntakeForward;
+	public JoystickButton joyIntakeReverse;
 	public JoystickButton joyPhotonOnOff;
+	public JoystickButton joySolenoidTest;
+	public JoystickButton joyArmOutIn;
 	
 	// switchbox buttons
 	public JoystickButton shoot;
 	public JoystickButton intakeInvert;
-	public JoystickButton duckTailUpDown;
-	public JoystickButton intakeOnOff;
-	public JoystickButton flyWheelFastSlowOff;
+	public JoystickButton duckTailUp;
+	public JoystickButton duckTailDown;
+	public JoystickButton intakeForward;
+	public JoystickButton intakeReverse;
+	public JoystickButton flyWheelOn;
 	public JoystickButton photonOnOff;
+	public JoystickButton HoodUp;
+	public JoystickButton HoodDown;
+	
+	public JoystickButton auto1;
+	public JoystickButton auto2;
+	public JoystickButton auto3;
 	
 	// following button is regarding a possibility of being able to press a button to line yourself up and shoot for you.
 	public JoystickButton smartShoot;
@@ -90,47 +103,80 @@ public class OI {
         switchbox = new Joystick(2);
         
         // Joystick button assignments, **need to verify**
-        joyShoot = new JoystickButton(rightJoy, 1);
-        joyIntakeOnOff = new JoystickButton(leftJoy, 3);
+        
+        //right Joystick
+        joyShootHigh = new JoystickButton(rightJoy, 1);
+        joyShootLow = new JoystickButton(rightJoy, 2);
+        joyShootOff = new JoystickButton(rightJoy, 3);
         joyPhotonOnOff = new JoystickButton(rightJoy, 4);
+        joyArmOutIn = new JoystickButton(rightJoy,5);
+        
+        //left Joystick
+        joyIntakeForward = new JoystickButton(leftJoy, 3);
+        joyIntakeReverse = new JoystickButton(leftJoy,4);
+        joySolenoidTest = new JoystickButton(leftJoy, 6);
         
         //switchbox button assigments, **need to verify**
-        shoot = new JoystickButton(switchbox, 5);
-        intakeInvert = new JoystickButton(switchbox, 4);
-        duckTailUpDown = new JoystickButton(switchbox, 1);
-        intakeOnOff = new JoystickButton(switchbox, 3);
-        flyWheelFastSlowOff = new JoystickButton(switchbox, 2);
-        photonOnOff = new JoystickButton(switchbox, 6);
+        
+        //Button Box
+        shoot = new JoystickButton(switchbox, 11);
+        duckTailUp = new JoystickButton(switchbox, 0);
+        duckTailDown = new JoystickButton(switchbox, 1);
+        intakeForward = new JoystickButton(switchbox, 4);
+        intakeReverse = new JoystickButton(switchbox, 5);
+        flyWheelOn = new JoystickButton(switchbox, 3);
+        photonOnOff = new JoystickButton(switchbox, 7);
+        smartShoot = new JoystickButton(switchbox, 9);
+        HoodUp = new JoystickButton(switchbox, 8);
+        HoodDown = new JoystickButton(switchbox, 15);
+        
+        auto1 = new JoystickButton(switchbox, 11);
+        auto2 = new JoystickButton(switchbox, 12);
+        auto3 = new JoystickButton(switchbox, 13);
         
         
-        if (flyWheelFastSlowOff.get() == true){
-        	shoot.whenPressed(new ShootHigh());
-        	joyShoot.whenPressed(new ShootHigh());
-        } else if(flyWheelFastSlowOff.get() == false){
-        	shoot.whenPressed(new ShootLow());
-        	joyShoot.whenPressed(new ShootLow());
-        }
         
-        if((intakeOnOff.get() == true || joyIntakeOnOff.get() == true)&& intakeInvert.get() == false){
-        	new FeedIn();
-        } else if((intakeOnOff.get() == true || joyIntakeOnOff.get() == true) && intakeInvert.get() == true){
-        	new FeedOut();
-        } else{
-        	new FeedOff();
-        }
+       
+        joyShootHigh.whenPressed(new ShootHigh());
+        joyShootOff.whenPressed(new ShootOff());
         
-        duckTailUpDown.whenActive(new DuckTailFullDown());
-        if(shoot.get() == true){
-        	duckTailUpDown.whenInactive(new DuckTailMid());
-        }else{
-        	duckTailUpDown.whenInactive(new DuckTailUp());
-        }
+        flyWheelOn.whenActive(new ShootHigh());
+        
+        flyWheelOn.whenReleased(new ShootOff());
+        
+        
+        duckTailUp.whenActive(new DuckTailUp());
+        duckTailDown.whenActive(new DuckTailFullDown());
+        
+        duckTailUp.whenReleased(new DuckTailMid());
+        duckTailDown.whenReleased(new DuckTailMid());
+        
+        intakeForward.whenActive(new FeedInInternal());
+        intakeForward.whenActive(new FeedInExternal());
+        
+        intakeForward.whenReleased(new FeedOffInternal());
+        intakeForward.whenReleased(new FeedOffExternal());
+        
+        intakeReverse.whenActive(new FeedOutInternal());
+        intakeReverse.whenActive(new FeedOutExternal());
+        
+        intakeReverse.whenReleased(new FeedOffInternal());
+        intakeReverse.whenReleased(new FeedOffExternal());
+        
+        joySolenoidTest.whenPressed(new DuckTailUp());
+        joySolenoidTest.whenReleased(new DuckTailFullDown());
+        
         
         photonOnOff.whenActive(new PhotonOn());
-        photonOnOff.whenInactive(new PhotonOff());
+        photonOnOff.whenReleased(new PhotonOff());
         
         joyPhotonOnOff.whenPressed(new PhotonOn());
         joyPhotonOnOff.whenReleased(new PhotonOff());
+        
+        joyArmOutIn.whenPressed(new ArmOut());
+        joyArmOutIn.whenReleased(new ArmIn());
+        
+        smartShoot.whenPressed(new AutoLowAndShoot());
         
     }
     

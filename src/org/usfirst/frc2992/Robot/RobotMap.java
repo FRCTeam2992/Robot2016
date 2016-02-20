@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
@@ -46,14 +47,19 @@ public class RobotMap {
     public static AnalogGyro driveTrainGyro;
     public static Solenoid driveTrainDriveshifthighlow;
     public static SpeedController feedFeederwheel;
+    public static SpeedController feedWheel2;
+    public static SpeedController feedWheel3;
     public static DigitalInput FeedLimit;
     public static DigitalInput ShootReadyLeft;
     public static DigitalInput ShootReadyRight;
-	public static DigitalOutput PhotonCannon;
+	public static Relay PhotonCannon;
     public static Solenoid feedLA;
     public static Solenoid feedLB;
     public static Solenoid feedRA;
     public static Solenoid feedRB;
+    public static Solenoid hoodL;
+    public static Solenoid hoodR;
+    public static Solenoid arm;
     public static SpeedController shooterShooterwheel;
     public static Encoder ShootEncoder;
     
@@ -108,6 +114,10 @@ public class RobotMap {
         feedFeederwheel = new Victor(7);
         LiveWindow.addActuator("Feed", "Feeder wheel", (Victor) feedFeederwheel);
         
+        feedWheel2= new Victor(8);
+        
+        feedWheel3 = new Victor(9);
+        
         FeedLimit = new DigitalInput(6);
         LiveWindow.addSensor("Feed", "Feeder system Limit switch", FeedLimit);
         
@@ -115,7 +125,8 @@ public class RobotMap {
         
         ShootReadyRight = new DigitalInput(8);
         
-        PhotonCannon = new DigitalOutput(9);
+        PhotonCannon = new Relay(0);
+        PhotonCannon.setDirection(Relay.Direction.kForward);
         
         feedLA = new Solenoid(0, 1);
         //LiveWindow.addActuator("Feed", "Duck tail updown", feedLA);
@@ -125,6 +136,12 @@ public class RobotMap {
         feedRA = new Solenoid(0,3);
         
         feedRB = new Solenoid(0,4);
+        
+        hoodL = new Solenoid(0,5);
+        
+        hoodR = new Solenoid(0,6);
+        
+        arm = new Solenoid(0,7);
         
         shooterShooterwheel = new Talon(6);
         LiveWindow.addActuator("Shooter", "Shooter wheel", (Talon) shooterShooterwheel);

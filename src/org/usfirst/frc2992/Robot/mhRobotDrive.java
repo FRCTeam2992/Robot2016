@@ -54,7 +54,7 @@ public class mhRobotDrive implements MotorSafety{
 		
     }
 	
-	/*public void smartDrive(SpeedController LF, SpeedController LM, SpeedController LR, SpeedController RF, SpeedController RM, SpeedController RR,
+	public void smartDrive(SpeedController LF, SpeedController LM, SpeedController LR, SpeedController RF, SpeedController RM, SpeedController RR,
 			Encoder LEnc, Encoder REnc,
 			double Kp, double Ki, double Kd, double Kf){
 		
@@ -106,9 +106,14 @@ public class mhRobotDrive implements MotorSafety{
 		
 		
 		
-    	//setupMotorSafety();
+    	if (!safetyHelper.isSafetyEnabled()) {
+            safetyHelper.setSafetyEnabled(true);
+     	   
+        }
+
+        safetyHelper.feed();
 	}
-	*/
+	
 	
 	/**
     *
@@ -126,8 +131,8 @@ public class mhRobotDrive implements MotorSafety{
 
 
        // Set the drive motors
-       setLeftSpeed(leftDriveMotors, leftspeed);
-       setRightSpeed(rightDriveMotors, -rightspeed);
+       setLeftSpeed(leftDriveMotors, -leftspeed);
+       setRightSpeed(rightDriveMotors, rightspeed);
        
        /*
         * shifts between high/low gear
