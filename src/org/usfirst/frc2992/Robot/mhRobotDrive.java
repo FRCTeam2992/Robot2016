@@ -33,14 +33,14 @@ public class mhRobotDrive implements MotorSafety{
 	
 	public mhRobotDrive(){
 		leftDriveMotors = new SpeedController[3];
-		leftDriveMotors[0] = RobotMap.LFWheel;
-		leftDriveMotors[1] = RobotMap.LMWheel;
-		leftDriveMotors[2] = RobotMap.LRWheel;
+		leftDriveMotors[0] = RobotMap.lFWheel;
+		leftDriveMotors[1] = RobotMap.lMWheel;
+		leftDriveMotors[2] = RobotMap.lRWheel;
 		
 		rightDriveMotors = new SpeedController[3];
-		rightDriveMotors[0] = RobotMap.RFWheel;
-		rightDriveMotors[1] = RobotMap.RMWheel;
-		rightDriveMotors[2] = RobotMap.RRWheel;
+		rightDriveMotors[0] = RobotMap.rFWheel;
+		rightDriveMotors[1] = RobotMap.rMWheel;
+		rightDriveMotors[2] = RobotMap.rRWheel;
 
 		mLF = leftDriveMotors[0];
 		mLM = leftDriveMotors[1];
@@ -50,19 +50,7 @@ public class mhRobotDrive implements MotorSafety{
 		mRM = rightDriveMotors[1];
 		mRR = rightDriveMotors[2];
 		
-	    setupMotorSafety();		
-		
-    }
-	
-	public void smartDrive(SpeedController LF, SpeedController LM, SpeedController LR, SpeedController RF, SpeedController RM, SpeedController RR,
-			Encoder LEnc, Encoder REnc,
-			double Kp, double Ki, double Kd, double Kf){
-		
-		mKp = Kp;
-		mKi = Ki;
-		mKd = Kd;
-		mKf = Kf;
-		
+
 		LFDrive = new PIDController(mKp, mKi, mKd, mKf, LEnc, mLF);
 		LMDrive = new PIDController(mKp, mKi, mKd, mKf, LEnc, mLM);
 		LRDrive = new PIDController(mKp, mKi, mKd, mKf, LEnc, mLR);
@@ -70,9 +58,6 @@ public class mhRobotDrive implements MotorSafety{
 		RFDrive = new PIDController(mKp, mKi, mKd, mKf, REnc, mRF);
 		RMDrive = new PIDController(mKp, mKi, mKd, mKf, REnc, mRM);
 		RRDrive = new PIDController(mKp, mKi, mKd, mKf, REnc, mRR);
-		
-		LEnc.reset();
-		REnc.reset();
 		
 		LFDrive.setOutputRange(-PowerMax, PowerMax);
 		LFDrive.setInputRange(-SpeedMax, SpeedMax);
@@ -103,6 +88,34 @@ public class mhRobotDrive implements MotorSafety{
 		RRDrive.setInputRange(-SpeedMax, SpeedMax);
 		RRDrive.setPercentTolerance(1.0);
     	RRDrive.disable();
+		
+		
+		
+		
+	    setupMotorSafety();		
+		
+    }
+	
+	public void smartDrive(SpeedController LF, SpeedController LM, SpeedController LR, SpeedController RF, SpeedController RM, SpeedController RR,
+			Encoder LEnc, Encoder REnc,
+			double Kp, double Ki, double Kd, double Kf){
+		
+		mKp = Kp;
+		mKi = Ki;
+		mKd = Kd;
+		mKf = Kf;
+		
+		LEnc.reset();
+		REnc.reset();
+		
+		LFDrive.enable();
+		LMDrive.enable();
+		LRDrive.enable();
+		
+		RFDrive.enable();
+		RMDrive.enable();
+		RRDrive.enable();
+		
 		
 		
 		

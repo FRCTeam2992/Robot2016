@@ -119,21 +119,19 @@ public class OI {
         //switchbox button assigments, **need to verify**
         
         //Button Box
-        shoot = new JoystickButton(switchbox, 11);
-        duckTailUp = new JoystickButton(switchbox, 0);
-        duckTailDown = new JoystickButton(switchbox, 1);
-        intakeForward = new JoystickButton(switchbox, 4);
-        intakeReverse = new JoystickButton(switchbox, 5);
-        flyWheelOn = new JoystickButton(switchbox, 3);
-        photonOnOff = new JoystickButton(switchbox, 7);
-        smartShoot = new JoystickButton(switchbox, 9);
-        HoodUp = new JoystickButton(switchbox, 8);
-        HoodDown = new JoystickButton(switchbox, 15);
+        shoot = new JoystickButton(switchbox, 12);
+        duckTailUp = new JoystickButton(switchbox, 1);
+        duckTailDown = new JoystickButton(switchbox, 2);
+        intakeForward = new JoystickButton(switchbox, 5);
+        intakeReverse = new JoystickButton(switchbox, 6);
+        flyWheelOn = new JoystickButton(switchbox, 4);
+        photonOnOff = new JoystickButton(switchbox, 8);
+        HoodUp = new JoystickButton(switchbox, 9);
+        HoodDown = new JoystickButton(switchbox, 16);
         
-        auto1 = new JoystickButton(switchbox, 11);
-        auto2 = new JoystickButton(switchbox, 12);
-        auto3 = new JoystickButton(switchbox, 13);
-        
+        auto1 = new JoystickButton(switchbox, 13);
+        auto2 = new JoystickButton(switchbox, 14);
+        auto3 = new JoystickButton(switchbox, 15);
         
         
        
@@ -176,7 +174,7 @@ public class OI {
         joyArmOutIn.whenPressed(new ArmOut());
         joyArmOutIn.whenReleased(new ArmIn());
         
-        smartShoot.whenPressed(new AutoLowAndShoot());
+        //smartShoot.whenPressed(new AutoLowAndShoot());
         
     }
     

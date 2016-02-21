@@ -43,19 +43,19 @@ public class DriveTrain extends Subsystem {
     private final mhRobotDrive mhRobotDrive = RobotMap.mhRobotDrive;
     private final AnalogGyro Gyro = RobotMap.driveTrainGyro;
     
-    private final Encoder LeftEnc = RobotMap.LEncoder;
-    private final Encoder RightEnc = RobotMap.REncoder;
+    private final Encoder LeftEnc = RobotMap.lEncoder;
+    private final Encoder RightEnc = RobotMap.rEncoder;
 	
     private DualCoder allcoders;
     
     DrivePID distance;
-    PIDController DistPID;
+    PIDController distPID;
     final double Dkp = 2.0;
     final double Dki = 0.0;
     final double Dkd = 0.0;
     
     RotatePID turn;
-    PIDController TurnPID;
+    PIDController turnPID;
     final double Rkp = 2.0;
     final double Rki = 0.0;
     final double Rkd = 0.0;
@@ -95,33 +95,33 @@ public class DriveTrain extends Subsystem {
 		allcoders = new DualCoder(LeftEnc, RightEnc);
 		
     	distance = new DrivePID(mhRobotDrive, Gyro);
-    	DistPID = new PIDController(Dkp, Dki, Dkd, allcoders, distance);
-    	DistPID.setOutputRange(-0.3, 0.3);
-    	DistPID.setInputRange(-40.0, 40.0);
-    	DistPID.setPercentTolerance(1.0);
-    	DistPID.disable();
+    	distPID = new PIDController(Dkp, Dki, Dkd, allcoders, distance);
+    	distPID.setOutputRange(-0.3, 0.3);
+    	distPID.setInputRange(-40.0, 40.0);
+    	distPID.setPercentTolerance(1.0);
+    	distPID.disable();
     	
     	turn = new RotatePID(mhRobotDrive);
-    	TurnPID = new PIDController(Rkp, Rki, Rkd, Gyro, turn);
-    	TurnPID.setOutputRange(-1.5, 1.5);
-    	TurnPID.setInputRange(-360.0, 360.0);
-    	TurnPID.setPercentTolerance(1.0);
-    	TurnPID.disable();
+    	turnPID = new PIDController(Rkp, Rki, Rkd, Gyro, turn);
+    	turnPID.setOutputRange(-1.5, 1.5);
+    	turnPID.setInputRange(-360.0, 360.0);
+    	turnPID.setPercentTolerance(1.0);
+    	turnPID.disable();
     	
     	
     	if(Math.abs(Distance) > 0 && Degrees == 0){
-    		TurnPID.disable();
-    		DistPID.setSetpoint(Distance);
-    		DistPID.enable();
+    		turnPID.disable();
+    		distPID.setSetpoint(Distance);
+    		distPID.enable();
     		
     	}else if(Math.abs(Degrees) > 0 && Distance == 0){
-    		DistPID.disable();
-    		TurnPID.setSetpoint(Degrees);
-    		TurnPID.enable();
+    		distPID.disable();
+    		turnPID.setSetpoint(Degrees);
+    		turnPID.enable();
     		
     	}else{
-    		DistPID.disable();
-    		TurnPID.disable();
+    		distPID.disable();
+    		turnPID.disable();
     		allStop();
     	}
     }

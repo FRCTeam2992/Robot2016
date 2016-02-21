@@ -87,6 +87,10 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData(tail);
         SmartDashboard.putData(shooter);
         SmartDashboard.putData(shootReady);
+        SmartDashboard.putData(arm);
+        SmartDashboard.putData(intFeed);
+        SmartDashboard.putData(extFeed);
+        SmartDashboard.putData(photon);
         
     }
 
@@ -129,10 +133,11 @@ public class Robot extends IterativeRobot {
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
         
-        SmartDashboard.putBoolean("Solenoid A", RobotMap.feedLA.get());
-        SmartDashboard.putBoolean("Solenoid B", RobotMap.feedLB.get());
-        SmartDashboard.putBoolean("Ducktail Up Sw", oi.duckTailUp.get());
-        SmartDashboard.putBoolean("Ducktail Down", oi.duckTailDown.get());
+       // SmartDashboard.putBoolean("Solenoid A", RobotMap.feedLA.get());
+       // SmartDashboard.putBoolean("Solenoid B", RobotMap.feedLB.get());
+       // SmartDashboard.putBoolean("Ducktail Up Sw", oi.duckTailUp.get());
+       // SmartDashboard.putBoolean("Ducktail Down", oi.duckTailDown.get());
+        SmartDashboard.putBoolean("Feed Limit Switch", RobotMap.feedLimit.get());
     }
 
     /**
