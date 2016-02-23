@@ -114,6 +114,10 @@ public class Shooter extends Subsystem {
     }
     
     public void reverse(){
+    	buttonbox  = Robot.oi.getSwitchbox();
+    	
+    	buttonbox.setOutput(6, false);
+    	
     	shootPID.disable();
     	shooterwheel.set(reversespeed);
     	shootOn = true;
@@ -121,6 +125,10 @@ public class Shooter extends Subsystem {
     }
     
     public void stop(){
+    	buttonbox  = Robot.oi.getSwitchbox();
+    	
+    	buttonbox.setOutput(6, false);
+    	
     	shootPID.disable();
     	shooterwheel.set(0);
     	shootOn = false;

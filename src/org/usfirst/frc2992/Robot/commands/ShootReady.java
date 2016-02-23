@@ -41,14 +41,14 @@ public class ShootReady extends Command {
     	
     	
     	//left light on button box
-    	if(ShootPosition.ShootReadyLeft() == true){
+    	if(ShootPosition.ShootReadyLeft() == false){
     		ButtonBox.setOutput(4, true);
     	} else {
     		ButtonBox.setOutput(4, false);
     	}
     	
     	//right light on button box
-    	if(ShootPosition.ShootReadyRight() == true){
+    	if(ShootPosition.ShootReadyRight() == false){
     		ButtonBox.setOutput(5, true);
     	} else {
     		ButtonBox.setOutput(5, false);
