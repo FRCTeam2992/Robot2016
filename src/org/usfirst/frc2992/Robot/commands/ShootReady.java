@@ -20,19 +20,25 @@ import org.usfirst.frc2992.Robot.subsystems.ShootPosition;
  *
  */
 public class ShootReady extends Command {
+	
+	Joystick ButtonBox;
 
     public ShootReady() {
-
+    	ButtonBox = Robot.oi.getSwitchbox();
+    	
         requires(Robot.shootReady);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	ButtonBox.setOutput(4, false);
+    	ButtonBox.setOutput(5, false);
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Joystick ButtonBox = Robot.oi.getSwitchbox();
+    	
     	
     	//left light on button box
     	if(ShootPosition.ShootReadyLeft() == true){
@@ -42,7 +48,7 @@ public class ShootReady extends Command {
     	}
     	
     	//right light on button box
-    	if(ShootPosition.ShootReadyRight()== true){
+    	if(ShootPosition.ShootReadyRight() == true){
     		ButtonBox.setOutput(5, true);
     	} else {
     		ButtonBox.setOutput(5, false);
@@ -56,10 +62,14 @@ public class ShootReady extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	ButtonBox.setOutput(4, false);
+    	ButtonBox.setOutput(5, false);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	ButtonBox.setOutput(4, false);
+    	ButtonBox.setOutput(5, false);
     }
 }
