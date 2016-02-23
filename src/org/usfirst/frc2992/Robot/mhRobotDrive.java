@@ -51,7 +51,7 @@ public class mhRobotDrive implements MotorSafety{
 		mRR = rightDriveMotors[2];
 		
 
-		LFDrive = new PIDController(mKp, mKi, mKd, mKf, LEnc, mLF);
+		/*LFDrive = new PIDController(mKp, mKi, mKd, mKf, LEnc, mLF);
 		LMDrive = new PIDController(mKp, mKi, mKd, mKf, LEnc, mLM);
 		LRDrive = new PIDController(mKp, mKi, mKd, mKf, LEnc, mLR);
 		
@@ -90,7 +90,7 @@ public class mhRobotDrive implements MotorSafety{
     	RRDrive.disable();
 		
 		
-		
+		*/
 		
 	    setupMotorSafety();		
 		

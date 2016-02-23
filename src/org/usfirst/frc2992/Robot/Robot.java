@@ -91,6 +91,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData(intFeed);
         SmartDashboard.putData(extFeed);
         SmartDashboard.putData(photon);
+        SmartDashboard.putData(hood);
         
     }
 
@@ -105,6 +106,9 @@ public class Robot extends IterativeRobot {
 
     public void disabledPeriodic() {
         Scheduler.getInstance().run();
+        setAutoMode();
+        SmartDashboard.putNumber("Auto Command Number", autoCommandNum);
+        SmartDashboard.putString("Auto Command Name", autoName);
     }
 
     public void autonomousInit() {

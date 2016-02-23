@@ -43,6 +43,7 @@ public class DriveSticks extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	this.setInterruptible(true);
     	
     	Robot.mhRobotDrive.allStop();
     }
@@ -62,9 +63,9 @@ public class DriveSticks extends Command {
     	
 
     	if (leftTrigger == true){
-     	   RobotMap.driveTrainDriveshifthighlow.set(true);
+     	   RobotMap.driveShiftHighlow.set(true);
         } else {
-     	   RobotMap.driveTrainDriveshifthighlow.set(false);
+     	   RobotMap.driveShiftHighlow.set(false);
         }
     	
     }

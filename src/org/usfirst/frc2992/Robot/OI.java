@@ -82,8 +82,8 @@ public class OI {
 	public JoystickButton intakeReverse;
 	public JoystickButton flyWheelOn;
 	public JoystickButton photonOnOff;
-	public JoystickButton HoodUp;
-	public JoystickButton HoodDown;
+	public JoystickButton hoodUp;
+	public JoystickButton hoodDown;
 	
 	public JoystickButton auto1;
 	public JoystickButton auto2;
@@ -116,7 +116,7 @@ public class OI {
         joyIntakeReverse = new JoystickButton(leftJoy,4);
         joySolenoidTest = new JoystickButton(leftJoy, 6);
         
-        //switchbox button assigments, **need to verify**
+        //switchbox button assigments
         
         //Button Box
         shoot = new JoystickButton(switchbox, 12);
@@ -126,21 +126,22 @@ public class OI {
         intakeReverse = new JoystickButton(switchbox, 6);
         flyWheelOn = new JoystickButton(switchbox, 4);
         photonOnOff = new JoystickButton(switchbox, 8);
-        HoodUp = new JoystickButton(switchbox, 9);
-        HoodDown = new JoystickButton(switchbox, 16);
+        hoodUp = new JoystickButton(switchbox, 9);
+        hoodDown = new JoystickButton(switchbox, 16);
         
         auto1 = new JoystickButton(switchbox, 13);
         auto2 = new JoystickButton(switchbox, 14);
         auto3 = new JoystickButton(switchbox, 15);
         
         
-       
         joyShootHigh.whenPressed(new ShootHigh());
         joyShootOff.whenPressed(new ShootOff());
         
         flyWheelOn.whenActive(new ShootHigh());
         
         flyWheelOn.whenReleased(new ShootOff());
+        
+        shoot.whenPressed(new ShootCmd());
         
         
         duckTailUp.whenActive(new DuckTailUp());
@@ -149,21 +150,26 @@ public class OI {
         duckTailUp.whenReleased(new DuckTailMid());
         duckTailDown.whenReleased(new DuckTailMid());
         
-        intakeForward.whenActive(new FeedInInternal());
-        intakeForward.whenActive(new FeedInExternal());
+        intakeForward.whenActive(new FeedInternalIn());
+        intakeForward.whenActive(new FeedExternalIn());
         
-        intakeForward.whenReleased(new FeedOffInternal());
-        intakeForward.whenReleased(new FeedOffExternal());
+        intakeForward.whenReleased(new FeedInternalOff());
+        intakeForward.whenReleased(new FeedExternalOff());
         
-        intakeReverse.whenActive(new FeedOutInternal());
-        intakeReverse.whenActive(new FeedOutExternal());
+        intakeReverse.whenActive(new FeedInternalOut());
+        intakeReverse.whenActive(new FeedExternalOut());
         
-        intakeReverse.whenReleased(new FeedOffInternal());
-        intakeReverse.whenReleased(new FeedOffExternal());
+        intakeReverse.whenReleased(new FeedInternalOff());
+        intakeReverse.whenReleased(new FeedExternalOff());
         
         joySolenoidTest.whenPressed(new DuckTailUp());
         joySolenoidTest.whenReleased(new DuckTailFullDown());
         
+        hoodUp.whenActive(new HoodUp());
+        hoodDown.whenActive(new HoodDown());
+        
+        hoodUp.whenReleased(new HoodSmart());
+        hoodDown.whenReleased(new HoodSmart());
         
         photonOnOff.whenActive(new PhotonOn());
         photonOnOff.whenReleased(new PhotonOff());

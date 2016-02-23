@@ -6,8 +6,7 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 
 public class DualCoder implements PIDSource {
 
-	Encoder m_Encoders[] = new Encoder[4];
-	boolean strafeMode = false;
+	Encoder m_Encoders[] = new Encoder[2];
 	
 	public DualCoder(Encoder l, Encoder r){
 		m_Encoders[0] = l;
