@@ -53,9 +53,10 @@ public class DriveSticks extends Command {
     	mhJoystick leftJoy = Robot.oi.getLeftJoy();
     	mhJoystick rightJoy = Robot.oi.getRightJoy();
     	
-    	double leftY = leftJoy.smoothGetY();
-    	double rightY = rightJoy.smoothGetY();
+    	double leftY = -leftJoy.smoothGetY();
+    	double rightY = -rightJoy.smoothGetY();
     	boolean leftTrigger = leftJoy.getRawButton(1);
+    	boolean rightTrigger = rightJoy.getRawButton(1);
     	
     	//counter to track if both joysticks are reading 0 values
     	
@@ -64,7 +65,8 @@ public class DriveSticks extends Command {
 
     	if (leftTrigger == true){
      	   RobotMap.driveShiftHighlow.set(true);
-        } else {
+        } 
+    	if(rightTrigger == true) {
      	   RobotMap.driveShiftHighlow.set(false);
         }
     	

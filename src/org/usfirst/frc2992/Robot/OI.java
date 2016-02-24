@@ -71,7 +71,8 @@ public class OI {
 	public JoystickButton joyIntakeReverse;
 	public JoystickButton joyPhotonOnOff;
 	public JoystickButton joySolenoidTest;
-	public JoystickButton joyArmOutIn;
+	public JoystickButton joyArmOut;
+	public JoystickButton joyArmIn;
 	
 	// switchbox buttons
 	public JoystickButton shoot;
@@ -109,7 +110,8 @@ public class OI {
         joyShootLow = new JoystickButton(rightJoy, 2);
         joyShootOff = new JoystickButton(rightJoy, 3);
         joyPhotonOnOff = new JoystickButton(rightJoy, 4);
-        joyArmOutIn = new JoystickButton(rightJoy,5);
+        joyArmOut = new JoystickButton(rightJoy, 5);
+        joyArmIn = new JoystickButton(rightJoy, 3);
         
         //left Joystick
         joyIntakeForward = new JoystickButton(leftJoy, 3);
@@ -168,8 +170,8 @@ public class OI {
         hoodUp.whenActive(new HoodUp());
         hoodDown.whenActive(new HoodDown());
         
-        hoodUp.whenReleased(new HoodSmart());
-        hoodDown.whenReleased(new HoodSmart());
+        //hoodUp.whenReleased(new HoodSmart());
+        //hoodDown.whenReleased(new HoodSmart());
         
         photonOnOff.whenActive(new PhotonOn());
         photonOnOff.whenReleased(new PhotonOff());
@@ -177,11 +179,12 @@ public class OI {
         joyPhotonOnOff.whenPressed(new PhotonOn());
         joyPhotonOnOff.whenReleased(new PhotonOff());
         
-        joyArmOutIn.whenPressed(new ArmOut());
-        joyArmOutIn.whenReleased(new ArmIn());
+        joyArmOut.whenPressed(new ArmOut());
+        joyArmIn.whenPressed(new ArmIn());
         
         //smartShoot.whenPressed(new AutoLowAndShoot());
         
+
     }
     
     public mhJoystick getLeftJoy(){

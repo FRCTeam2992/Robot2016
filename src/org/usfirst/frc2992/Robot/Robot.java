@@ -93,6 +93,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData(photon);
         SmartDashboard.putData(hood);
         
+        
     }
 
     /**
@@ -121,6 +122,9 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        SmartDashboard.putNumber("Left Encoder", RobotMap.lEncoder.getDistance());
+        SmartDashboard.putNumber("Right Encoder",  RobotMap.rEncoder.getDistance());
+
     }
 
     public void teleopInit() {
@@ -142,6 +146,8 @@ public class Robot extends IterativeRobot {
        // SmartDashboard.putBoolean("Ducktail Up Sw", oi.duckTailUp.get());
        // SmartDashboard.putBoolean("Ducktail Down", oi.duckTailDown.get());
         SmartDashboard.putBoolean("Feed Limit Switch", RobotMap.feedLimit.get());
+        SmartDashboard.putNumber("Left Encoder", RobotMap.lEncoder.getDistance());
+        SmartDashboard.putNumber("Right Encoder",  RobotMap.rEncoder.getDistance());
     }
 
     /**

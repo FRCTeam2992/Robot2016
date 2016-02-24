@@ -52,17 +52,18 @@ public class ShootCmd extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new HoodUp());
+        addParallel(new ShootHigh());
+    	addParallel(new HoodUp());
     	addSequential(new WaitCommand(.25));
-    	addSequential(new FeedInternalIn());
-    	addSequential(new WaitCommand(1.0));
-    	addSequential(new HoodDown());
-    	addSequential(new FeedInternalOff());
+    	addParallel(new FeedIntFire());
+    	addSequential(new WaitCommand(2.0));
+    	addParallel(new HoodDown());
+    	addParallel(new FeedInternalOff());
     }
     protected void initialize() {
     	this.setInterruptible(true);
     	
-    	time = 2.0;
+    	time = 5.0;
     	
     	timetotal.reset();
     	timetotal.start();

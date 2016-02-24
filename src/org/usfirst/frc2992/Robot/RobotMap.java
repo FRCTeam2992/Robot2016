@@ -46,19 +46,19 @@ public class RobotMap {
     public static Encoder lEncoder;
     public static AnalogGyro driveTrainGyro;
     public static Solenoid driveShiftHighlow;
-    public static SpeedController feedFeederwheel;
-    public static SpeedController feedWheel2;
+    public static SpeedController feedExternal;
+    public static SpeedController feedInternal;
     public static DigitalInput feedLimit;
     public static DigitalInput shootReadyLeft;
     public static DigitalInput shootReadyRight;
 	public static Relay photonCannon;
-    public static Solenoid feedLA;
-    public static Solenoid feedLB;
+    public static Solenoid tailLong;
+    public static Solenoid tailShort;
     public static Solenoid feedRA;
     public static Solenoid feedRB;
-    public static Solenoid hoodL;
+    public static Solenoid hoodUpDown;
     public static Solenoid hoodR;
-    public static Solenoid arm;
+    public static Solenoid armOutIn;
     public static SpeedController shooterShooterwheel;
     public static Encoder shootEncoder;
     
@@ -88,29 +88,31 @@ public class RobotMap {
         //LiveWindow.addActuator("DriveTrain", "Left rear drive wheel", (VictorSP) LRWheel);
         
         //Check Distance Per Pulse
-        rEncoder = new Encoder(0, 1, false, EncodingType.k4X);
+        rEncoder = new Encoder(2, 3, false, EncodingType.k4X);
         LiveWindow.addSensor("DriveTrain", "Right drive train encoder", rEncoder);
-        rEncoder.setDistancePerPulse(0.01954833);
-        rEncoder.setPIDSourceType(PIDSourceType.kRate);
+        rEncoder.setDistancePerPulse(3.1415 * 7.08 / 128.0 / 3.0 / 3.0); // inches
+        rEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
         
-        lEncoder = new Encoder(2, 3, true, EncodingType.k4X);
+        lEncoder = new Encoder(0, 1, true, EncodingType.k4X);
         LiveWindow.addSensor("DriveTrain", "Left drive train encoder", lEncoder);
-        lEncoder.setDistancePerPulse(0.01954833);
-        lEncoder.setPIDSourceType(PIDSourceType.kRate);
+        lEncoder.setReverseDirection(true);
+        // Encoder 128ppr, 7.65in dia wheel, 3 enc revs per wheel rev
+        lEncoder.setDistancePerPulse(3.1415 * 7.08 / 128.0 / 3.0 / 3.0); // inches
+        lEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
         
         driveTrainGyro = new AnalogGyro(0);
         driveTrainGyro.reset();
         LiveWindow.addSensor("DriveTrain", "Gyro", driveTrainGyro);
         driveTrainGyro.setSensitivity(0.007);
         
-        driveShiftHighlow = new Solenoid(0, 0);
+        driveShiftHighlow = new Solenoid(0, 4);
         LiveWindow.addActuator("DriveTrain", "Drive shift highlow", driveShiftHighlow);
         
-        feedFeederwheel = new Victor(7);
-        LiveWindow.addActuator("extFeed", "Feeder wheel", (Victor) feedFeederwheel);
+        feedExternal = new Victor(8);
+        LiveWindow.addActuator("extFeed", "Feeder wheel", (Victor) feedExternal);
         
-        feedWheel2= new Victor(8);
-        LiveWindow.addActuator("intFeed", "Feeder wheel 2", (Victor) feedFeederwheel);
+        feedInternal= new Victor(7);
+        LiveWindow.addActuator("intFeed", "Feeder wheel 2", (Victor) feedInternal);
         
         feedLimit = new DigitalInput(6);
         LiveWindow.addSensor("Feed", "Feeder system Limit switch", feedLimit);
@@ -122,21 +124,22 @@ public class RobotMap {
         photonCannon = new Relay(0);
         photonCannon.setDirection(Relay.Direction.kForward);
         
-        feedLA = new Solenoid(0, 1);
-        LiveWindow.addActuator("Feed", "Duck tail updown A", feedLA);
+        tailLong = new Solenoid(0, 3);
+        LiveWindow.addActuator("Feed", "Duck tail updown A", tailLong);
         
-        feedLB = new Solenoid(0,2);
-        LiveWindow.addActuator("Feed", "Duck tail updown B", feedLB);
+        tailShort = new Solenoid(0,2);
+        LiveWindow.addActuator("Feed", "Duck tail updown B", tailShort);
         
-        feedRA = new Solenoid(0,3);
+        //feedRA = new Solenoid(0,3);
         
-        feedRB = new Solenoid(0,4);
+        //feedRB = new Solenoid(0,4);
         
-        hoodL = new Solenoid(0,5);
+        hoodUpDown = new Solenoid(0,0);
         
-        hoodR = new Solenoid(0,6);
+        //hoodR = new Solenoid(0,6);
         
-        arm = new Solenoid(0,7);
+        armOutIn = new Solenoid(0,1);
+        LiveWindow.addActuator("Arm", "Arm Up Down", armOutIn);
         
         shooterShooterwheel = new Talon(6);
         LiveWindow.addActuator("Shooter", "Shooter wheel", (Talon) shooterShooterwheel);

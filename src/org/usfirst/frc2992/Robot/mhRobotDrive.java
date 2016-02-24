@@ -1,5 +1,8 @@
 package org.usfirst.frc2992.Robot;
 
+import org.usfirst.frc2992.Robot.subsystems.DrivePID;
+
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.MotorSafety;
 import edu.wpi.first.wpilibj.MotorSafetyHelper;
@@ -8,8 +11,8 @@ import edu.wpi.first.wpilibj.SpeedController;
 
 public class mhRobotDrive implements MotorSafety{
 
-	SpeedController[] leftDriveMotors;
-	SpeedController[] rightDriveMotors;
+	public SpeedController[] leftDriveMotors;
+	public SpeedController[] rightDriveMotors;
 	
 	SpeedController mLF;
 	SpeedController mLM;
@@ -19,19 +22,16 @@ public class mhRobotDrive implements MotorSafety{
 	SpeedController mRM;
 	SpeedController mRR;
 	
-	Encoder LEnc;
-	Encoder REnc;
+	Encoder lEnc;
+	Encoder rEnc;
 	
-	PIDController LFDrive, LMDrive, LRDrive, RFDrive, RMDrive, RRDrive;
-	
-	public final double PowerMax = 1.00;
-	public final double SpeedMax = 10.0;
 	
 	protected MotorSafetyHelper safetyHelper;
 	
-	double mKp, mKi, mKd, mKf;
 	
 	public mhRobotDrive(){
+		
+		
 		leftDriveMotors = new SpeedController[3];
 		leftDriveMotors[0] = RobotMap.lFWheel;
 		leftDriveMotors[1] = RobotMap.lMWheel;
@@ -42,90 +42,11 @@ public class mhRobotDrive implements MotorSafety{
 		rightDriveMotors[1] = RobotMap.rMWheel;
 		rightDriveMotors[2] = RobotMap.rRWheel;
 
-		mLF = leftDriveMotors[0];
-		mLM = leftDriveMotors[1];
-		mLR = leftDriveMotors[2];
-		
-		mRF = rightDriveMotors[0];
-		mRM = rightDriveMotors[1];
-		mRR = rightDriveMotors[2];
-		
-
-		/*LFDrive = new PIDController(mKp, mKi, mKd, mKf, LEnc, mLF);
-		LMDrive = new PIDController(mKp, mKi, mKd, mKf, LEnc, mLM);
-		LRDrive = new PIDController(mKp, mKi, mKd, mKf, LEnc, mLR);
-		
-		RFDrive = new PIDController(mKp, mKi, mKd, mKf, REnc, mRF);
-		RMDrive = new PIDController(mKp, mKi, mKd, mKf, REnc, mRM);
-		RRDrive = new PIDController(mKp, mKi, mKd, mKf, REnc, mRR);
-		
-		LFDrive.setOutputRange(-PowerMax, PowerMax);
-		LFDrive.setInputRange(-SpeedMax, SpeedMax);
-		LFDrive.setPercentTolerance(1.0);
-    	LFDrive.disable();
-    	
-    	LMDrive.setOutputRange(-PowerMax, PowerMax);
-		LMDrive.setInputRange(-SpeedMax, SpeedMax);
-		LMDrive.setPercentTolerance(1.0);
-    	LMDrive.disable();
-    	
-    	LRDrive.setOutputRange(-PowerMax, PowerMax);
-		LRDrive.setInputRange(-SpeedMax, SpeedMax);
-		LRDrive.setPercentTolerance(1.0);
-    	LRDrive.disable();
-    	
-    	RFDrive.setOutputRange(-PowerMax, PowerMax);
-		RFDrive.setInputRange(-SpeedMax, SpeedMax);
-		RFDrive.setPercentTolerance(1.0);
-    	RFDrive.disable();
-    	
-    	RMDrive.setOutputRange(-PowerMax, PowerMax);
-		RMDrive.setInputRange(-SpeedMax, SpeedMax);
-		RMDrive.setPercentTolerance(1.0);
-    	RMDrive.disable();
-    	
-    	RRDrive.setOutputRange(-PowerMax, PowerMax);
-		RRDrive.setInputRange(-SpeedMax, SpeedMax);
-		RRDrive.setPercentTolerance(1.0);
-    	RRDrive.disable();
-		
-		
-		*/
-		
+    			
 	    setupMotorSafety();		
 		
     }
 	
-	public void smartDrive(SpeedController LF, SpeedController LM, SpeedController LR, SpeedController RF, SpeedController RM, SpeedController RR,
-			Encoder LEnc, Encoder REnc,
-			double Kp, double Ki, double Kd, double Kf){
-		
-		mKp = Kp;
-		mKi = Ki;
-		mKd = Kd;
-		mKf = Kf;
-		
-		LEnc.reset();
-		REnc.reset();
-		
-		LFDrive.enable();
-		LMDrive.enable();
-		LRDrive.enable();
-		
-		RFDrive.enable();
-		RMDrive.enable();
-		RRDrive.enable();
-		
-		
-		
-		
-    	if (!safetyHelper.isSafetyEnabled()) {
-            safetyHelper.setSafetyEnabled(true);
-     	   
-        }
-
-        safetyHelper.feed();
-	}
 	
 	
 	/**
@@ -144,8 +65,8 @@ public class mhRobotDrive implements MotorSafety{
 
 
        // Set the drive motors
-       setLeftSpeed(leftDriveMotors, -leftspeed);
-       setRightSpeed(rightDriveMotors, rightspeed);
+       setSpeed(leftDriveMotors, -leftspeed);   // Left motors are reversed
+       setSpeed(rightDriveMotors, rightspeed);
        
        /*
         * shifts between high/low gear
@@ -164,19 +85,21 @@ public class mhRobotDrive implements MotorSafety{
        safetyHelper.feed();
        
    }
-  
+   
+   
+
+   
 /**
 *
 * Internal utility method to actually set the left drive motors directly.
 * Private so should not be used outside this class file.
 *
-* @param leftDriveMotors -- left array of motors to set
 * @param speed -- speed to set the motors to
 *
 */
-	private void setLeftSpeed(SpeedController[] leftDriveMotors, double speed) {
-        for (int i=0; i<leftDriveMotors.length; i++){
-    		leftDriveMotors[i].set(speed);
+	private void setSpeed(SpeedController[] motors, double speed) {
+        for (int i=0; i<motors.length; i++){
+    		motors[i].set(speed); 
         	
         }
     }
@@ -185,15 +108,10 @@ public class mhRobotDrive implements MotorSafety{
 	* Internal utility method to actually set the left drive motors directly.
 	* Private so should not be used outside this class file.
 	*
-	* @param leftDriveMotors -- left array of motors to set
 	* @param speed -- speed to set the motors to
 	*
 	*/
-	private void setRightSpeed(SpeedController[] rightDriveMotors, double speed) {
-		for (int i=0; i<rightDriveMotors.length; i++) {
-	        rightDriveMotors[i].set(speed);
-		}
-    }
+
 	public void setExpiration(double timeout) {
         safetyHelper.setExpiration(timeout);
     }

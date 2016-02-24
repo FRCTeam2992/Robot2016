@@ -3,6 +3,7 @@ package org.usfirst.frc2992.Robot;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DualCoder implements PIDSource {
 
@@ -25,8 +26,9 @@ public class DualCoder implements PIDSource {
 	 */
 	public double pidGet() {
 		double sum = 0;
-		sum += m_Encoders[0].getDistance();
+		sum -= m_Encoders[0].getDistance();  // Left encoder is reversed
 		sum += m_Encoders[1].getDistance();
+		SmartDashboard.putNumber("DoubleCoder output", sum/2.0);
 		return sum/2.0;
 	}
 	
@@ -52,7 +54,7 @@ public class DualCoder implements PIDSource {
 	@Override
 	public PIDSourceType getPIDSourceType() {
 		// TODO Auto-generated method stub
-		return null;
+		return PIDSourceType.kDisplacement;
 	}
 
 }

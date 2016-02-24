@@ -29,7 +29,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Arm extends Subsystem {
 	
-	private final Solenoid arm = RobotMap.arm;
+	private final Solenoid arm = RobotMap.armOutIn;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 

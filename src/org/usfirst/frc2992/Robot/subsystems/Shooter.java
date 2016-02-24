@@ -70,11 +70,12 @@ public class Shooter extends Subsystem {
 
     public Shooter(){
     	super();
-    	
+    	/*
     	shootPID = new PIDController(kP, kI, kD, kF, shootEnc, shooterwheel);
     	shootPID.setOutputRange(-powerMax, powerMax);
 		shootPID.setInputRange(-speedMax, speedMax);
 		shootPID.setPercentTolerance(1.0);
+		*/
     }
     
     public void initDefaultCommand() {
@@ -96,7 +97,7 @@ public class Shooter extends Subsystem {
     	
     	shootspeed = (buttonbox.getX() * 8.468); //scales x axis to motor powers: 8.468 scale = [0,1]
 
-    	shootEnc.reset();
+    	/*shootEnc.reset();
     	
 		shootPID.setSetpoint(shootspeed);
 		shootPID.enable();
@@ -111,6 +112,14 @@ public class Shooter extends Subsystem {
     		buttonbox.setOutput(6, false);
     	}
     	SmartDashboard.putNumber("shooter wheel", shootEnc.getRate());
+    	*/
+    	
+    	shooterwheel.set(shootspeed);
+    	SmartDashboard.putNumber("shooter raw", buttonbox.getX());
+    	SmartDashboard.putNumber("Shoot Speed", shootspeed);
+    	
+    	shootOn = true;
+    	buttonbox.setOutput(6, true);
     }
     
     public void reverse(){
@@ -118,7 +127,7 @@ public class Shooter extends Subsystem {
     	
     	buttonbox.setOutput(6, false);
     	
-    	shootPID.disable();
+    	//shootPID.disable();
     	shooterwheel.set(reversespeed);
     	shootOn = true;
     	SmartDashboard.putNumber("shooter wheel", shootEnc.getRate());
@@ -129,7 +138,7 @@ public class Shooter extends Subsystem {
     	
     	buttonbox.setOutput(6, false);
     	
-    	shootPID.disable();
+    	//shootPID.disable();
     	shooterwheel.set(0);
     	shootOn = false;
     	SmartDashboard.putNumber("shooter wheel", shootEnc.getRate());
