@@ -116,7 +116,7 @@ public class OI {
         //left Joystick
         joyIntakeForward = new JoystickButton(leftJoy, 3);
         joyIntakeReverse = new JoystickButton(leftJoy,4);
-        joySolenoidTest = new JoystickButton(leftJoy, 6);
+        //joySolenoidTest = new JoystickButton(leftJoy, 6);
         
         //switchbox button assigments
         
@@ -164,8 +164,8 @@ public class OI {
         intakeReverse.whenReleased(new FeedInternalOff());
         intakeReverse.whenReleased(new FeedExternalOff());
         
-        joySolenoidTest.whenPressed(new DuckTailUp());
-        joySolenoidTest.whenReleased(new DuckTailFullDown());
+        //joySolenoidTest.whenPressed(new DuckTailUp());
+        //joySolenoidTest.whenReleased(new DuckTailFullDown());
         
         hoodUp.whenActive(new HoodUp());
         hoodDown.whenActive(new HoodDown());
