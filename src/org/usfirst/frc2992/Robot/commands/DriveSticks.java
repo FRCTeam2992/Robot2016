@@ -62,7 +62,7 @@ public class DriveSticks extends Command {
     	
     	Robot.mhRobotDrive.tankDrive(leftY, rightY);
     	
-
+    	//left Trigger returns high
     	if (leftTrigger == true){
      	   RobotMap.driveShiftHighlow.set(true);
         } 

@@ -170,6 +170,9 @@ public class OI {
         hoodUp.whenActive(new HoodUp());
         hoodDown.whenActive(new HoodDown());
         
+        if (hoodUp.get() == false){
+        	hoodDown.whenInactive(new HoodSmart());
+        }
         //hoodUp.whenReleased(new HoodSmart());
         //hoodDown.whenReleased(new HoodSmart());
         

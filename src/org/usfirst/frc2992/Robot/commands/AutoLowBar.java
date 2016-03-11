@@ -46,6 +46,9 @@ public class AutoLowBar extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	addParallel(new DuckTailFullDown());
+    	addParallel(new ArmOut());
+    	addSequential(new WaitCommand(1.0));
     	addSequential(new DriveAuto(24.0, 0.0, 10.0));  // inches, no rotation, 10 seconds
     	addSequential(new WaitCommand(2));
     	addSequential(new DriveStop());

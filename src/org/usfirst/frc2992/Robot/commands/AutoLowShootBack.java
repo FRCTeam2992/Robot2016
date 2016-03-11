@@ -46,6 +46,9 @@ public class AutoLowShootBack extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
+    	addParallel(new DuckTailFullDown());
+    	addParallel(new ArmOut());
+    	addSequential(new WaitCommand(1.0));
     	addSequential(new DriveAuto(2.0, 0.0, 1.0));
     	addSequential(new WaitCommand(1));
     	addSequential(new DriveAuto(0.0, 36.0, 1.0));

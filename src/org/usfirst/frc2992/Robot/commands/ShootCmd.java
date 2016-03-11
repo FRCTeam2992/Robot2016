@@ -54,16 +54,17 @@ public class ShootCmd extends CommandGroup {
         // arm.
         addParallel(new ShootHigh());
     	addParallel(new HoodUp());
+    	addParallel(new ArmOut());
     	addSequential(new WaitCommand(.25));
     	addParallel(new FeedIntFire());
-    	addSequential(new WaitCommand(2.0));
+    	addSequential(new WaitCommand(4.0));
     	addParallel(new HoodDown());
     	addParallel(new FeedInternalOff());
     }
     protected void initialize() {
     	this.setInterruptible(true);
     	
-    	time = 5.0;
+    	time = 7.5;
     	
     	timetotal.reset();
     	timetotal.start();

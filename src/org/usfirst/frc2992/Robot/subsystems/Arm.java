@@ -11,17 +11,10 @@
 
 package org.usfirst.frc2992.Robot.subsystems;
 
-import org.usfirst.frc2992.Robot.Robot;
 import org.usfirst.frc2992.Robot.RobotMap;
 import org.usfirst.frc2992.Robot.commands.*;
-import org.usfirst.frc2992.Robot.subsystems.Shooter;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Victor;
-
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**

@@ -34,8 +34,8 @@ public class FeedInternal extends Subsystem {
     private final DigitalInput feedersystemLimitswitch = RobotMap.feedLimit;
     
     // used to set the feed forward and reverse speeds.
-    final double feedFspeed = .5;
-    final double feedRspeed = -.5;
+    final double feedFspeed = .75;
+    final double feedRspeed = -.75;
     
    
     
