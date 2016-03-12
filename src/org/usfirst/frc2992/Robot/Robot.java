@@ -11,6 +11,7 @@
 
 package org.usfirst.frc2992.Robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -48,6 +49,17 @@ public class Robot extends IterativeRobot {
     public static String autoName;
     public static int autoCommandNum;
     
+ // Vision constants
+    public static final boolean SimpleVision = true;
+    CameraServer server;
+    public static final String frontCamName = "cam0";
+    public static final int imgQual = 50;
+    // Constants for 2 camera vision mode (only used if SimpleVision is false)
+    public static final int btFrontCam = 5;
+    public static final int btRearCam = 6;
+    public static final String rearCamName = "cam1";
+    CameraFeeds cameraFeeds;
+
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -93,7 +105,18 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putData(photon);
         SmartDashboard.putData(hood);
         
+        // Vision
         
+        if (SimpleVision) {
+        	// Single camera mode
+        	server = CameraServer.getInstance();
+            server.setQuality(imgQual);
+            //the camera name (ex "cam0") can be found through the roborio web interface
+            server.startAutomaticCapture(frontCamName);
+        } else {
+        	// Multiple camera mode
+        	cameraFeeds = new CameraFeeds();
+        }
     }
 
     /**
@@ -102,7 +125,10 @@ public class Robot extends IterativeRobot {
      */
     public void disabledInit(){
     	mhRobotDrive.allStop();
-
+    	if (SimpleVision == false) {
+           	// Multi camera mode so stop video
+           	cameraFeeds.end();
+           }
     }
 
     public void disabledPeriodic() {
@@ -133,6 +159,11 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        
+        if (SimpleVision == false) {
+        	// Multi camera mode so force to front camera
+        	cameraFeeds.init();
+        }
     }
 
     /**
@@ -148,6 +179,11 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("Feed Limit Switch", RobotMap.feedLimit.get());
         SmartDashboard.putNumber("Left Encoder", RobotMap.lEncoder.getDistance());
         SmartDashboard.putNumber("Right Encoder",  RobotMap.rEncoder.getDistance());
+        
+        if (SimpleVision == false) {
+        	// Multi camera mode so process video
+        	cameraFeeds.run();
+        }
     }
 
     /**
