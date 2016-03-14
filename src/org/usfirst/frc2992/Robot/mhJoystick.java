@@ -1,7 +1,5 @@
 package org.usfirst.frc2992.Robot;
 
-import org.usfirst.frc2992.Robot.subsystems.DriveTrain;
-
 import edu.wpi.first.wpilibj.Joystick;
 
 public class mhJoystick extends Joystick{

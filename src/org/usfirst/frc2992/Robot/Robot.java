@@ -53,7 +53,7 @@ public class Robot extends IterativeRobot {
     public static final boolean SimpleVision = true;
     CameraServer server;
     public static final String frontCamName = "cam0";
-    public static final int imgQual = 50;
+    public static final int imgQual = 70;
     // Constants for 2 camera vision mode (only used if SimpleVision is false)
     public static final int btFrontCam = 5;
     public static final int btRearCam = 6;

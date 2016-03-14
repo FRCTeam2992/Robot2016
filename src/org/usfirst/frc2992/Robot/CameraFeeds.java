@@ -4,8 +4,8 @@ import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
 import edu.wpi.first.wpilibj.CameraServer;
 
-public class CameraFeeds
-{
+public class CameraFeeds {
+	
 	private final int camFront;
 	private final int camRear;
 	private int curCam;
@@ -13,8 +13,7 @@ public class CameraFeeds
 	private CameraServer server;
 
 	
-	public CameraFeeds()
-	{
+	public CameraFeeds() {
         // Get camera ids by supplying camera name ex 'cam0', found on roborio web interface
         camFront = NIVision.IMAQdxOpenCamera(Robot.frontCamName, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
         camRear = NIVision.IMAQdxOpenCamera(Robot.rearCamName, NIVision.IMAQdxCameraControlMode.CameraControlModeController);
@@ -27,13 +26,11 @@ public class CameraFeeds
 
 	}
 	
-	public void init()
-	{
+	public void init() {
 		changeCam(camFront);
 	}
 	
-	public void run()
-	{
+	public void run() {
 		if(Robot.oi.leftJoy.getRawButton(Robot.btFrontCam)) {
 			changeCam(camFront);
 		}
@@ -47,8 +44,7 @@ public class CameraFeeds
 	/**
 	 * Stop aka close camera stream
 	 */
-	public void end()
-	{
+	public void end() {
 		NIVision.IMAQdxStopAcquisition(curCam);
 	}
 	
@@ -56,8 +52,7 @@ public class CameraFeeds
 	 * Change the camera to get imgs from to a different one
 	 * @param newId for camera
 	 */
-	public void changeCam(int newId)
-    {
+	public void changeCam(int newId) {
 		NIVision.IMAQdxStopAcquisition(curCam);
     	NIVision.IMAQdxConfigureGrab(newId);
     	NIVision.IMAQdxStartAcquisition(newId);
@@ -67,8 +62,7 @@ public class CameraFeeds
 	/**
 	 * Get the img from current camera and give it to the server
 	 */
-    public void updateCam()
-    {
+    public void updateCam() {
     	NIVision.IMAQdxGrab(curCam, frame, 1);
         server.setImage(frame);
     }

@@ -1,12 +1,8 @@
 package org.usfirst.frc2992.Robot;
 
-import org.usfirst.frc2992.Robot.subsystems.DrivePID;
-
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.MotorSafety;
 import edu.wpi.first.wpilibj.MotorSafetyHelper;
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SpeedController;
 
 public class mhRobotDrive implements MotorSafety{
@@ -65,8 +61,8 @@ public class mhRobotDrive implements MotorSafety{
 
 
        // Set the drive motors
-       setSpeed(leftDriveMotors, -leftspeed);   // Left motors are reversed
-       setSpeed(rightDriveMotors, rightspeed);
+       setSpeed(leftDriveMotors, -leftspeed/2);   // Left motors are reversed
+       setSpeed(rightDriveMotors, rightspeed/2);
        
        /*
         * shifts between high/low gear
