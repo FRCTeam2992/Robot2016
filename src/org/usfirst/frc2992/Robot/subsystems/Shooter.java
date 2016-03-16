@@ -41,7 +41,7 @@ public class Shooter extends Subsystem {
     private double shootspeed;
     private double speedIs;
     
-    final double reversespeed = -.25;
+    final double reversespeed = .35;
     
     final double kP = 0.0001;
     final double kI = 0.0;
@@ -71,6 +71,8 @@ public class Shooter extends Subsystem {
     	shootPID.setOutputRange(-powerMax, powerMax);
 		shootPID.setInputRange(-rpmMax, rpmMax);
 		shootPID.setPercentTolerance(1.0);
+		
+		time = new Timer();
     }
     
     public void initDefaultCommand() {
@@ -91,10 +93,11 @@ public class Shooter extends Subsystem {
     	buttonbox  = Robot.oi.getSwitchbox();
     	if (buttonbox.getRawButton(10) == true){
     		reverse();
+    		return;
     	} else if (buttonbox.getRawButton(11) == true) {
-    		shootspeed = 4600;//rpm
+    		shootspeed = -4200;//rpm
     	} else {
-    		shootspeed = 3500;//rpm
+    		shootspeed = -3500;//rpm
     	}
     	//shootspeed = (buttonbox.getX() * 8.468); //scales x axis to motor powers: 8.468 scale = [0,1]
     	
@@ -119,7 +122,7 @@ public class Shooter extends Subsystem {
     	buttonbox  = Robot.oi.getSwitchbox();
     	
     	//shootspeed = (buttonbox.getX() * 8.468); //scales x axis to motor powers: 8.468 scale = [0,1]
-    	shootspeed = .25;
+    	shootspeed = -.25;
     	shootPID.disable();
     	
     	shooterwheel.set(shootspeed);
@@ -153,7 +156,6 @@ public class Shooter extends Subsystem {
     }
     
     public void shootReady(){
-    	time.reset();
     	time.start();
     	
     	if (Math.abs(speedIs) <= 100){
@@ -161,6 +163,7 @@ public class Shooter extends Subsystem {
     	} else if (buttonbox.getRawButton(12) == true){
     		shootOn = true;
     	} else if(time.get() >= maxTime){
+    		time.reset();
     		time.stop();
     		shootOn = false;
     	} else{

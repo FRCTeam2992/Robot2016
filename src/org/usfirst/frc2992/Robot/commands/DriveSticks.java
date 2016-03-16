@@ -50,28 +50,19 @@ public class DriveSticks extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+
     	mhJoystick leftJoy = Robot.oi.getLeftJoy();
     	mhJoystick rightJoy = Robot.oi.getRightJoy();
     	
-    	double leftY = -leftJoy.smoothGetY();
-    	double rightY = -rightJoy.smoothGetY();
-    	boolean leftTrigger = leftJoy.getRawButton(1);
-    	boolean rightTrigger = rightJoy.getRawButton(1);
+    	//boolean leftTrigger = leftJoy.getRawButton(1);
+    	//boolean rightTrigger = rightJoy.getRawButton(1);
     	
     	//counter to track if both joysticks are reading 0 values
+    	Robot.mhRobotDrive.tankDrive(leftJoy, rightJoy);
     	
-    	Robot.mhRobotDrive.tankDrive(leftY, rightY);
-    	
-    	//left Trigger returns high
-    	if (leftTrigger == true){
-     	   RobotMap.driveShiftHighlow.set(true);
-        } 
-    	if(rightTrigger == true) {
-     	   RobotMap.driveShiftHighlow.set(false);
-        }
     	
     }
-
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;

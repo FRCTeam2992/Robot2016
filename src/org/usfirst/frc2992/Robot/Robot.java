@@ -50,7 +50,7 @@ public class Robot extends IterativeRobot {
     public static int autoCommandNum;
     
  // Vision constants
-    public static final boolean SimpleVision = true;
+    public static final boolean SimpleVision = false;
     CameraServer server;
     public static final String frontCamName = "cam0";
     public static final int imgQual = 70;
@@ -179,6 +179,8 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("Feed Limit Switch", RobotMap.feedLimit.get());
         SmartDashboard.putNumber("Left Encoder", RobotMap.lEncoder.getDistance());
         SmartDashboard.putNumber("Right Encoder",  RobotMap.rEncoder.getDistance());
+        SmartDashboard.putNumber("Shooter speed", RobotMap.shootEncoder.getRate());
+        SmartDashboard.putNumber("Shooter Current", RobotMap.power.getCurrent(12));
         
         if (SimpleVision == false) {
         	// Multi camera mode so process video

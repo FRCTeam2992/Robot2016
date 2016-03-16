@@ -64,6 +64,10 @@ public class OI {
 	// joystick buttons
 	//public JoystickButton gearHigh;
 	//public JoystickButton gearLow;
+	
+	public JoystickButton DriveFor;
+	public JoystickButton DriveRev;
+	
 	public JoystickButton joyShootHigh;
 	public JoystickButton joyShootLow;
 	public JoystickButton joyShootOff;
@@ -97,8 +101,8 @@ public class OI {
 
     public OI() {
     	// joysticks
-        leftJoy = new mhJoystick(0);
-        rightJoy = new mhJoystick(1);
+        leftJoy = new mhJoystick(1);
+        rightJoy = new mhJoystick(0);
         
         // switchbox
         switchbox = new Joystick(2);
@@ -108,15 +112,18 @@ public class OI {
         //right Joystick
         joyShootHigh = new JoystickButton(rightJoy, 1);
         joyShootLow = new JoystickButton(rightJoy, 2);
-        joyShootOff = new JoystickButton(rightJoy, 3);
+        //joyShootOff = new JoystickButton(rightJoy, 3);
         joyPhotonOnOff = new JoystickButton(rightJoy, 4);
-        joyArmOut = new JoystickButton(rightJoy, 5);
-        joyArmIn = new JoystickButton(rightJoy, 3);
+        joyArmOut = new JoystickButton(rightJoy, 3);
+        joyArmIn = new JoystickButton(rightJoy, 5);
         
         //left Joystick
         joyIntakeForward = new JoystickButton(leftJoy, 3);
         joyIntakeReverse = new JoystickButton(leftJoy,4);
-        joySolenoidTest = new JoystickButton(leftJoy, 6);
+        //joySolenoidTest = new JoystickButton(leftJoy, 6);
+        
+        DriveFor = new JoystickButton(leftJoy, 5);
+        DriveRev = new JoystickButton(leftJoy, 6);
         
         //switchbox button assigments
         
@@ -136,8 +143,8 @@ public class OI {
         auto3 = new JoystickButton(switchbox, 15);
         
         
-        joyShootHigh.whenPressed(new ShootHigh());
-        joyShootOff.whenPressed(new ShootOff());
+        //joyShootHigh.whenPressed(new ShootHigh());
+        joyShootLow.whenPressed(new ShootOff());
         
         flyWheelOn.whenActive(new ShootHigh());
         
@@ -164,8 +171,8 @@ public class OI {
         intakeReverse.whenReleased(new FeedInternalOff());
         intakeReverse.whenReleased(new FeedExternalOff());
         
-        joySolenoidTest.whenPressed(new DuckTailUp());
-        joySolenoidTest.whenReleased(new DuckTailFullDown());
+        //joySolenoidTest.whenPressed(new DuckTailUp());
+        //joySolenoidTest.whenReleased(new DuckTailFullDown());
         
         hoodUp.whenActive(new HoodUp());
         hoodDown.whenActive(new HoodDown());
@@ -173,10 +180,10 @@ public class OI {
         //hoodUp.whenReleased(new HoodSmart());
         //hoodDown.whenReleased(new HoodSmart());
         
-        photonOnOff.whenActive(new PhotonOn());
+        photonOnOff.whenActive(new PhotonCycle());
         photonOnOff.whenReleased(new PhotonOff());
         
-        joyPhotonOnOff.whenPressed(new PhotonOn());
+        joyPhotonOnOff.whenPressed(new PhotonCycle());
         joyPhotonOnOff.whenReleased(new PhotonOff());
         
         joyArmOut.whenPressed(new ArmOut());
@@ -184,6 +191,9 @@ public class OI {
         
         //smartShoot.whenPressed(new AutoLowAndShoot());
         
+        
+        DriveFor.whenPressed(new DriveSticks());
+        DriveRev.whenPressed(new DriveSticksReverse());
 
     }
     

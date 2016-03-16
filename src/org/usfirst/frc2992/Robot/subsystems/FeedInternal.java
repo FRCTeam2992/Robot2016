@@ -34,13 +34,13 @@ public class FeedInternal extends Subsystem {
     private final DigitalInput feedersystemLimitswitch = RobotMap.feedLimit;
     
     // used to set the feed forward and reverse speeds.
-    final double feedFspeed = .75;
+    final double feedFspeed = 1;
     final double feedRspeed = -.75;
     
    
     
     public void feedIn(){
-    	if(feedersystemLimitswitch.get() == false){
+    	if(feedersystemLimitswitch.get() == false && Robot.hood.IsHoodUp() == true){
     		feederwheel2.set(feedFspeed);
     		SmartDashboard.putNumber("internal feed wheels", feederwheel2.get());
     	} else{
@@ -58,8 +58,10 @@ public class FeedInternal extends Subsystem {
     }
     
     public void feedOut(){
+    	if (Robot.hood.IsHoodUp() == true){
     	feederwheel2.set(feedRspeed);
     	SmartDashboard.putNumber("internal feed wheels", feederwheel2.get());
+    	}
     }
     
     public boolean limit(){

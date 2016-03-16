@@ -57,14 +57,23 @@ public class PhotonCannon extends Subsystem {
         setDefaultCommand(new PhotonOff());
     }
       
+    public PhotonCannon(){
+    	super();
+    	photonSafety = new Timer();
+    }
+    
     public void photonOn(){
-    	photonSafety.reset();
     	photonSafety.start();
     	if (photonSafety.get() < photonAutoOff){
         shootLight.set(Relay.Value.kOn);
     	} else {
-    		photonOff();
+    		photonReset();
     	}
+    }
+    
+    public void photonReset(){
+    	photonSafety.stop();
+    	shootLight.set(Relay.Value.kOff);
     }
     
     public void photonOff(){

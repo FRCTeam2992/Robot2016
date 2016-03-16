@@ -12,6 +12,7 @@
 package org.usfirst.frc2992.Robot.subsystems;
 
 import org.usfirst.frc2992.Robot.RobotMap;
+import org.usfirst.frc2992.Robot.mhJoystick;
 import org.usfirst.frc2992.Robot.mhRobotDrive;
 import org.usfirst.frc2992.Robot.DualCoder;
 import org.usfirst.frc2992.Robot.commands.*;
@@ -114,13 +115,21 @@ public class DriveTrain extends Subsystem {
         // setDefaultCommand(new MySpecialCommand());
     }
     
-    public void tankDrive(double leftY, double rightY){
+    public void tankDrive(mhJoystick leftJoy, mhJoystick rightJoy){
     	
-    	mhRobotDrive.tankDrive(leftY, rightY);
+    	mhRobotDrive.tankDrive(leftJoy.getY(), rightJoy.getY());
     	
     }
     
+    public void tankDriveRev(mhJoystick leftJoy, mhJoystick rightJoy){
+    	
+    	mhRobotDrive.tankDrive(-rightJoy.getY(), -leftJoy.getY());
+    }
     
+    public void tankDriveAuto(double left, double right){
+    	
+    	mhRobotDrive.tankDrive(left, right);
+    }
     /*
      * in progress PID control
      */
