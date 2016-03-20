@@ -75,16 +75,16 @@ public class DriveTrain extends Subsystem {
 		
     	lDistance = new DrivePID(this.mhRobotDrive.leftDriveMotors, Gyro);
     	lDistPID = new PIDController(Dkp, Dki, Dkd, LeftEnc, lDistance);
-    	lDistPID.setOutputRange(-0.3, 0.3);
-    	lDistPID.setInputRange(-40.0, 40.0);
+    	lDistPID.setOutputRange(-0.5, 0.5);
+    	lDistPID.setInputRange(-240.0, 240.0);
     	lDistPID.setPercentTolerance(1.0);
     	lDistPID.disable();
 
     	
     	rDistance = new DrivePID(this.mhRobotDrive.rightDriveMotors, Gyro);
     	rDistPID = new PIDController(Dkp, Dki, Dkd, RightEnc, rDistance);
-    	rDistPID.setOutputRange(-0.3, 0.3);
-    	rDistPID.setInputRange(-40.0, 40.0);
+    	rDistPID.setOutputRange(-0.5, 0.5);
+    	rDistPID.setInputRange(-240.0, 240.0);
     	rDistPID.setPercentTolerance(1.0);
     	rDistPID.disable();
 

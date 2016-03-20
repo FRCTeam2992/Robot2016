@@ -46,8 +46,9 @@ public class AutoForward extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new DriveForward(.5, 2.5));
-    	addSequential(new WaitCommand(2));
+    	addParallel(new DriveForward(.5, 4));
+    	addSequential(new WaitCommand(4));
+    	addParallel(new DriveStop());
     	
     }
 }

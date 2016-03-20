@@ -78,6 +78,8 @@ public class OI {
 	public JoystickButton joyArmOut;
 	public JoystickButton joyArmIn;
 	
+	public JoystickButton GearHigh;
+	
 	// switchbox buttons
 	public JoystickButton shoot;
 	public JoystickButton intakeInvert;
@@ -90,9 +92,9 @@ public class OI {
 	public JoystickButton hoodUp;
 	public JoystickButton hoodDown;
 	
-	public JoystickButton auto1;
-	public JoystickButton auto2;
-	public JoystickButton auto3;
+	public JoystickButton autoA;
+	public JoystickButton autoB;
+	public JoystickButton autoC;
 	
 	// following button is regarding a possibility of being able to press a button to line yourself up and shoot for you.
 	public JoystickButton smartShoot;
@@ -110,8 +112,8 @@ public class OI {
         // Joystick button assignments, **need to verify**
         
         //right Joystick
-        joyShootHigh = new JoystickButton(rightJoy, 1);
-        joyShootLow = new JoystickButton(rightJoy, 2);
+        //joyShootHigh = new JoystickButton(rightJoy, 1);
+        //joyShootLow = new JoystickButton(rightJoy, 2);
         //joyShootOff = new JoystickButton(rightJoy, 3);
         joyPhotonOnOff = new JoystickButton(rightJoy, 4);
         joyArmOut = new JoystickButton(rightJoy, 3);
@@ -121,6 +123,8 @@ public class OI {
         joyIntakeForward = new JoystickButton(leftJoy, 3);
         joyIntakeReverse = new JoystickButton(leftJoy,4);
         //joySolenoidTest = new JoystickButton(leftJoy, 6);
+        
+        GearHigh = new JoystickButton(rightJoy, 1);
         
         DriveFor = new JoystickButton(leftJoy, 5);
         DriveRev = new JoystickButton(leftJoy, 6);
@@ -138,13 +142,13 @@ public class OI {
         hoodUp = new JoystickButton(switchbox, 9);
         hoodDown = new JoystickButton(switchbox, 16);
         
-        auto1 = new JoystickButton(switchbox, 13);
-        auto2 = new JoystickButton(switchbox, 14);
-        auto3 = new JoystickButton(switchbox, 15);
+        autoA = new JoystickButton(switchbox, 13);
+        autoB = new JoystickButton(switchbox, 14);
+        autoC = new JoystickButton(switchbox, 15);
         
         
         //joyShootHigh.whenPressed(new ShootHigh());
-        joyShootLow.whenPressed(new ShootOff());
+        //joyShootLow.whenPressed(new ShootOff());
         
         flyWheelOn.whenActive(new ShootHigh());
         
@@ -189,6 +193,8 @@ public class OI {
         joyArmOut.whenPressed(new ArmOut());
         joyArmIn.whenPressed(new ArmIn());
         
+        GearHigh.whenPressed(new GearHigh());
+        GearHigh.whenReleased(new GearLow());
         //smartShoot.whenPressed(new AutoLowAndShoot());
         
         

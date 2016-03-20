@@ -61,8 +61,8 @@ public class mhRobotDrive implements MotorSafety{
 
 
        // Set the drive motors
-       setSpeed(leftDriveMotors, -leftspeed/2);   // Left motors are reversed
-       setSpeed(rightDriveMotors, rightspeed/2);
+       setSpeed(leftDriveMotors, leftspeed);   // Left motors are reversed
+       setSpeed(rightDriveMotors, -rightspeed);
        
        /*
         * shifts between high/low gear
