@@ -21,6 +21,8 @@ public class mhRobotDrive implements MotorSafety{
 	Encoder lEnc;
 	Encoder rEnc;
 	
+	private int motor = Constants.numDriveMotors;
+	
 	
 	protected MotorSafetyHelper safetyHelper;
 	
@@ -28,12 +30,12 @@ public class mhRobotDrive implements MotorSafety{
 	public mhRobotDrive(){
 		
 		
-		leftDriveMotors = new SpeedController[3];
+		leftDriveMotors = new SpeedController[motor];
 		leftDriveMotors[0] = RobotMap.lFWheel;
 		leftDriveMotors[1] = RobotMap.lMWheel;
 		leftDriveMotors[2] = RobotMap.lRWheel;
 		
-		rightDriveMotors = new SpeedController[3];
+		rightDriveMotors = new SpeedController[motor];
 		rightDriveMotors[0] = RobotMap.rFWheel;
 		rightDriveMotors[1] = RobotMap.rMWheel;
 		rightDriveMotors[2] = RobotMap.rRWheel;

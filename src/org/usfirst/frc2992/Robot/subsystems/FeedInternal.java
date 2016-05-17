@@ -11,6 +11,7 @@
 
 package org.usfirst.frc2992.Robot.subsystems;
 
+import org.usfirst.frc2992.Robot.Constants;
 import org.usfirst.frc2992.Robot.Robot;
 import org.usfirst.frc2992.Robot.RobotMap;
 import org.usfirst.frc2992.Robot.commands.*;
@@ -34,8 +35,8 @@ public class FeedInternal extends Subsystem {
     private final DigitalInput feedersystemLimitswitch = RobotMap.feedLimit;
     
     // used to set the feed forward and reverse speeds.
-    final double feedFspeed = 1;
-    final double feedRspeed = -.75;
+    final double feedFspeed = Constants.intFeedForwardSpeed;
+    final double feedRspeed = Constants.intFeedReverseSpeed;
     
    
     

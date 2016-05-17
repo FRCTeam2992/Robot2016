@@ -11,6 +11,7 @@
 
 package org.usfirst.frc2992.Robot.subsystems;
 
+import org.usfirst.frc2992.Robot.Constants;
 import org.usfirst.frc2992.Robot.Robot;
 import org.usfirst.frc2992.Robot.RobotMap;
 import org.usfirst.frc2992.Robot.commands.*;
@@ -41,20 +42,20 @@ public class Shooter extends Subsystem {
     private double shootspeed;
     private double speedIs;
     
-    final double reversespeed = .35;
+    final double reversespeed = Constants.shootReverseSpeed;
     
-    final double kP = 0.0001;
-    final double kI = 0.0;
-    final double kD = 0.004;
-    final double kF = 1.0/4600.0;
+    final double kP = Constants.shooterP;
+    final double kI = Constants.shooterI;
+    final double kD = Constants.shooterD;
+    final double kF = Constants.shooterF;
     
-    public final double powerMax = 1.0;
-	public final double rpmMax = 4600;
+    public final double powerMax = Constants.shooterPowerMax;
+	public final double rpmMax = Constants.shooterRpmMaxSpeed;
     
     public boolean shootOn = false;
     
     private Timer time;
-    private double maxTime = 7.5;
+    private double maxTime = Constants.maxShootTime;
     
     private Joystick buttonbox;
 

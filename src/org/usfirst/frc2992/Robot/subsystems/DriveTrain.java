@@ -14,6 +14,7 @@ package org.usfirst.frc2992.Robot.subsystems;
 import org.usfirst.frc2992.Robot.RobotMap;
 import org.usfirst.frc2992.Robot.mhJoystick;
 import org.usfirst.frc2992.Robot.mhRobotDrive;
+import org.usfirst.frc2992.Robot.Constants;
 import org.usfirst.frc2992.Robot.DualCoder;
 import org.usfirst.frc2992.Robot.commands.*;
 import edu.wpi.first.wpilibj.AnalogGyro;
@@ -53,9 +54,9 @@ public class DriveTrain extends Subsystem {
     PIDController lDistPID, rDistPID;
 
     
-    final double Dkp = 0.1;
-    final double Dki = 0.0;
-    final double Dkd = 0.0;
+    final double Dkp = Constants.distanceP;
+    final double Dki = Constants.distanceI;
+    final double Dkd = Constants.distanceD;
     
     RotatePID turn;
     PIDController turnPID;
@@ -117,7 +118,7 @@ public class DriveTrain extends Subsystem {
     
     public void tankDrive(mhJoystick leftJoy, mhJoystick rightJoy){
     	
-    	mhRobotDrive.tankDrive(leftJoy.getY(), rightJoy.getY());
+    	mhRobotDrive.tankDrive(leftJoy.getY()/2, rightJoy.getY()/2);
     	
     }
     

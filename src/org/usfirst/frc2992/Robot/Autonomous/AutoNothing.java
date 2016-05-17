@@ -9,7 +9,7 @@
 // it from being updated in the future.
 
 
-package org.usfirst.frc2992.Robot.commands;
+package org.usfirst.frc2992.Robot.Autonomous;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
