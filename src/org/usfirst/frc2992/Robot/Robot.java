@@ -185,7 +185,7 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putNumber("Left Encoder", RobotMap.lEncoder.getDistance());
         SmartDashboard.putNumber("Right Encoder",  RobotMap.rEncoder.getDistance());
         SmartDashboard.putNumber("Shooter speed", RobotMap.shootEncoder.getRate());
-        SmartDashboard.putNumber("Shooter Current", RobotMap.power.getCurrent(12));
+        //SmartDashboard.putNumber("Shooter Current", RobotMap.power.getCurrent(12));
         /*
         if (SimpleVision == false) {
         	// Multi camera mode so process video

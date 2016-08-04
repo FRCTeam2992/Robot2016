@@ -118,7 +118,7 @@ public class DriveTrain extends Subsystem {
     
     public void tankDrive(mhJoystick leftJoy, mhJoystick rightJoy){
     	
-    	mhRobotDrive.tankDrive(leftJoy.getY()/2, rightJoy.getY()/2);
+    	mhRobotDrive.tankDrive(leftJoy.getY(), rightJoy.getY());
     	
     }
     
