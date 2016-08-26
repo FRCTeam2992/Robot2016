@@ -37,7 +37,7 @@ public class Constants{// file used solely for constants elsewhere. keep variabl
      * FeedInternal
      */
     public static final double intFeedForwardSpeed = 1.0;
-    public static final double intFeedReverseSpeed = -0.75;
+    public static final double intFeedReverseSpeed = -1.0;
     
     
     /**

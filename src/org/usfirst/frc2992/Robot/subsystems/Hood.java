@@ -39,7 +39,7 @@ public class Hood extends Subsystem {
     private final Solenoid hoodLeft = RobotMap.hoodUpDown;
     //private final Solenoid hoodRight = RobotMap.hoodR;
     
-    public boolean hoodUp;
+    public boolean hoodUp = true;
     
     
 
@@ -49,14 +49,14 @@ public class Hood extends Subsystem {
     	hoodLeft.set(true);
     	//hoodRight.set(true);
     	
-    	hoodUp = true;
+    	//hoodUp = true;
     }
     
     public void HoodDown(){
     	hoodLeft.set(false);
     	//hoodRight.set(false);
     	
-    	hoodUp = false;
+    	//hoodUp = false;
     }
     
     public void HoodSmart(){
