@@ -176,6 +176,50 @@ public class DriveTrain extends Subsystem {
     	}
     }
     
+public void smartDriveFast(double Distance, double Degrees){
+    	
+		autoDist = Distance;
+		autoDegr = Degrees;
+    	
+		lDistPID.setOutputRange(-1.0, 1.0);
+		rDistPID.setOutputRange(-1.0, 1.0);
+		
+    	if(Math.abs(Distance) > 0.0 && Math.abs(Degrees) <= 0.01){
+    		System.out.println("Driving forward");
+    		turnPID.disable();
+    		LeftEnc.reset();
+    		RightEnc.reset();
+    		lDistPID.setSetpoint(-Distance); // Left side is reversed
+    		rDistPID.setSetpoint(Distance);
+    		System.out.println("PID target set to: " + Distance);
+    		lDistPID.enable();
+    		rDistPID.enable();
+    		
+    	}else if(Math.abs(Degrees) > 0 && Math.abs(Distance) <= 0.01){
+    		System.out.println("Turning");
+    		/*lDistPID.disable();
+    		rDistPID.disable();
+    		turnPID.setSetpoint(Degrees);
+    		turnPID.enable();*/
+    		turnPID.disable();
+    		LeftEnc.reset();
+    		RightEnc.reset();
+    		lDistPID.setSetpoint(-Degrees); // Left side is reversed
+    		rDistPID.setSetpoint(-Degrees);
+    		System.out.println("PID rotation set to: " + Degrees);
+    		lDistPID.enable();
+    		rDistPID.enable();
+    		
+    		
+    	}else{
+    		System.out.println("Stopping");
+    		lDistPID.disable();
+    		rDistPID.disable();
+    		turnPID.disable();
+    		allStop();
+    	}
+    }
+	
 	public boolean driveDone() {
 		if (Math.abs(autoDist) > 0.0 && Math.abs(autoDegr) <= 0.1) {
 			return lDistPID.onTarget() && rDistPID.onTarget();

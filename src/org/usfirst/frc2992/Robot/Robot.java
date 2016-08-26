@@ -236,6 +236,8 @@ public class Robot extends IterativeRobot {
     		case 5:	autonomousCommand = new AutoISurrender();
     				autoName = "Move through CDF";
     				break;
+    		case 6: autonomousCommand = new AutoMoat();
+    				autoName = "Charge Past Moat";
     		default: autonomousCommand = new AutoNothing();
     				autoName = "Default Do Nothing";
     				break;
